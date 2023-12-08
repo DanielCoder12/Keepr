@@ -30,9 +30,12 @@ public class Startup
     });
     services.AddSingleton<Auth0Provider>();
     services.AddScoped<IDbConnection>(x => CreateDbConnection());
-
     services.AddScoped<AccountsRepository>();
     services.AddScoped<AccountService>();
+
+    services.AddScoped<KeepsRepository>();
+    services.AddScoped<KeepsService>();
+
   }
 
   private void ConfigureCors(IServiceCollection services)
