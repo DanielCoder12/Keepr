@@ -64,11 +64,7 @@ FROM keeps
 WHERE keeps.id = 1
 GROUP BY(keeps.id);
 
-UPDATE keeps
-SET views = views + 1
-WHERE
-    keeps.id = @keepId
-LIMIT 1;
+UPDATE keeps SET views = views + 1 WHERE keeps.id = @keepId LIMIT 1;
 
 SELECT
     keeps.*,
@@ -79,3 +75,8 @@ FROM keeps
     LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
 WHERE keeps.id = 11
 GROUP BY(keeps.id);
+
+SELECT vaults.*, accounts.*
+FROM vaults
+    JOIN accounts ON accounts.id = vaults.`creatorId`
+WHERE vaults.id = 1;
