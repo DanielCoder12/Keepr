@@ -1,0 +1,86 @@
+<template>
+    <div class="container-fluid">
+        <section class="row d-flex justify-content-center mt-5">
+            <div class="col-8">
+                <!-- profile info -->
+                <section class="row d-flex justify-content-center">
+                    <ProfileInfo />
+                </section>
+                <p>Vaults</p>
+                <!-- profile vaults -->
+                <section class="row">
+                    <div v-for="vault in vaults" :key="vault.id" class="col-4">
+                        <VaultCard :vault="vault" />
+                    </div>
+                </section>
+                <!-- profile keeps -->
+                <section class="row">
+                    <p>keeps</p>
+                    <div v-for="keep in keeps" :key="keep.id" class="col-4">
+                        <KeepCard :keep="keep" />
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+</template>
+
+
+<script>
+import { useRoute } from 'vue-router';
+import { AppState } from '../AppState';
+import { computed, reactive, onMounted, watch, watchEffect } from 'vue';
+import Pop from '../utils/Pop';
+import { profileService } from '../services/ProfileService'
+import { logger } from '../utils/Logger';
+import { keepsService } from '../services/KeepsService';
+import { vaultsService } from '../services/VaultsService'
+import KeepCard from '../components/KeepCard.vue';
+import VaultCard from '../components/VaultCard.vue';
+import ProfileInfo from '../components/ProfileInfo.vue';
+
+export default {
+    setup() {
+        const route = useRoute();
+        watchEffect(() => {
+            route;
+            getProfile(),
+                getProfileKeeps(),
+                getProfileVaults();
+        });
+        async function getProfile() {
+            try {
+                await profileService.getProfile(route.params.profileId);
+            }
+            catch (error) {
+                Pop.error(error)
+            }
+        }
+        async function getProfileKeeps() {
+            try {
+                await keepsService.getProfileKeeps(route.params.profileId);
+            }
+            catch (error) {
+                Pop.error(error);
+            }
+        }
+        async function getProfileVaults() {
+            try {
+                await vaultsService.getProfileVaults(route.params.profileId)
+            }
+            catch (error) {
+                Pop.error(error);
+            }
+        }
+        return {
+            profile: computed(() => AppState.activeProfile),
+            vaults: computed(() => AppState.vaults),
+            keeps: computed(() => AppState.keeps)
+        };
+    },
+    components: { KeepCard, VaultCard, ProfileInfo }
+};
+</script>
+
+
+<style lang="scss" scoped></style>

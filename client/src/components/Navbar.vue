@@ -1,28 +1,35 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+  <!-- FIXME MAKE LOOK RIGHT ON MOBILE -->
+  <nav class="navbar border-bottom d-flex justify-content-between navbar-expand-sm navbar-dark px-3">
+    <div class="d-flex common-width align-items-center">
+
+      <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+        <button class="btn btn-primary rounded">Home</button>
+
+      </router-link>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Create
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li data-bs-toggle="modal" data-bs-target="#createKeepModal"><a class="dropdown-item" href="#">New
+              Keep</a></li>
+          <li data-bs-toggle="modal" data-bs-target="#createVaultModal"><a class="dropdown-item" href="#">New
+              Vault</a></li>
+        </ul>
       </div>
-    </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
-        </li>
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <div>
-        <button class="btn text-light" @click="toggleTheme"><i class="mdi" :class="theme == 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></i></button>
-      </div>
+    </div>
+
+    <!-- LOGIN COMPONENT HERE -->
+    <div>
+      logo
+    </div>
+    <div class="common-width">
+      <!-- FIXME UGLY -->
       <Login />
     </div>
+
   </nav>
 </template>
 
@@ -57,19 +64,24 @@ a:hover {
   text-decoration: none;
 }
 
+.common-width {
+  width: 14rem;
+}
+
+.border-bottom {
+  /* border: 4rem solid black; */
+  background-color: #FEF6F0;
+}
+
 .nav-link {
   text-transform: uppercase;
 }
 
-.navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid var(--bs-success);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
 
-@media screen and (min-width: 768px) {
+
+/* @media screen and (min-width: 768px) {
   nav {
     height: 64px;
-  }
-}
+  } */
+/* } */
 </style>
