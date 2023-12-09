@@ -4,6 +4,7 @@
 
 
 
+
 namespace Keepr.Repositories;
 
 public class KeepsRepository
@@ -132,5 +133,26 @@ public class KeepsRepository
            return k;
        }, new { keepId }).FirstOrDefault();
         return keep;
+    }
+
+    internal List<Keep> GetKeepsByProfileId(string profileId)
+    {
+        string sql = @"
+        SELECT 
+        keeps.*,
+        COUNT(vaultKeeps.id) AS kept,
+        accounts.*
+        FROM keeps
+        JOIN accounts ON keeps.creatorId = accounts.id 
+        LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+        WHERE keeps.creatorId = @profileId
+        GROUP BY(keeps.id)
+        ;";
+        List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (k, p) =>
+        {
+            k.Creator = p;
+            return k;
+        }, new { profileId }).ToList();
+        return keeps;
     }
 }

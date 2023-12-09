@@ -1,6 +1,7 @@
 
 
 
+
 namespace Keepr.Services;
 
 public class VaultsService
@@ -43,6 +44,13 @@ public class VaultsService
 
     }
 
+    internal List<VaultKeepViewModel> GetKeepsInVault(int vaultId, string id)
+    {
+        GetVaultById(vaultId, id);
+        List<VaultKeepViewModel> keeps = _repo.GetKeepsInVault(vaultId);
+        return keeps;
+    }
+
     internal Vault GetVaultById(int vaultId, string userId)
     {
         Vault vault = _repo.GetVaultById(vaultId);
@@ -55,5 +63,19 @@ public class VaultsService
             throw new Exception("Private Vault");
         }
         return vault;
+    }
+
+    internal List<Vault> GetVaultsByAccountId(string id)
+    {
+        List<Vault> vaults = _repo.GetVaultsByAccountId(id);
+        return vaults;
+    }
+
+    internal List<Vault> GetVaultsByProfileId(string profileId, string id)
+    {
+        List<Vault> vaults = _repo.GetVaultsByProfileId(profileId);
+        vaults = vaults.FindAll(v => v.IsPrivate == false && v.CreatorId != id);
+        return vaults;
+
     }
 }

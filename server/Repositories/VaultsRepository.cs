@@ -2,6 +2,10 @@
 
 
 
+
+
+using System.Data.Common;
+
 namespace Keepr.Repositories;
 
 public class VaultsRepository
@@ -66,6 +70,33 @@ public class VaultsRepository
         return vault;
     }
 
+    internal List<VaultKeepViewModel> GetKeepsInVault(int vaultId)
+    {
+        string sql = @"
+         SELECT
+        vaultKeeps.*,
+        accounts.*,
+        keeps.*,
+        COUNT(vk.id) AS kept
+        FROM vaultKeeps 
+        JOIN accounts ON accounts.id = vaultKeeps.creatorId
+        JOIN keeps ON keeps.id = vaultKeeps.keepId
+        LEFT JOIN vaultKeeps vk ON vk.keepId = keeps.id
+        WHERE vaultKeeps.vaultId = @vaultId
+        GROUP BY(keeps.id)
+        ;";
+
+        List<VaultKeepViewModel> vaultKeep = _db.Query<VaultKeepViewModel, Profile, Keep, VaultKeepViewModel>(sql, (vk, p, k) =>
+        {
+            vk.Keep = k;
+            vk.Creator = p;
+            vk.VaultKeepId = vk.Id;
+            vk.Id = k.Id;
+            return vk;
+        }, new { vaultId }).ToList();
+        return vaultKeep;
+    }
+
     internal Vault GetVaultById(int vaultId)
     {
         string sql = @"
@@ -81,5 +112,21 @@ public class VaultsRepository
             return v;
         }, new { vaultId }).FirstOrDefault();
         return vault;
+    }
+
+    internal List<Vault> GetVaultsByAccountId(string id)
+    {
+        string sql = @"
+        SELECT * FROM vaults where vaults.creatorId = @id
+        ;";
+        List<Vault> vaults = _db.Query<Vault>(sql, new { id }).ToList();
+        return vaults;
+    }
+
+    internal List<Vault> GetVaultsByProfileId(string profileId)
+    {
+        string sql = "SELECT * FROM vaults WHERE vaults.creatorId = @profileId;";
+        List<Vault> vaults = _db.Query<Vault>(sql, new { profileId }).ToList();
+        return vaults;
     }
 }

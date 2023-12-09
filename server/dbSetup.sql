@@ -80,3 +80,47 @@ SELECT vaults.*, accounts.*
 FROM vaults
     JOIN accounts ON accounts.id = vaults.`creatorId`
 WHERE vaults.id = 1;
+
+INSERT INTO
+    vaultKeeps(creatorId, vaultId, keepId)
+VALUES (@CreatorId, @VaultId, @Id);
+
+SELECT
+    vaultKeeps.*,
+    accounts.*,
+    keeps.*,
+    COUNT(vk.id) AS kept
+FROM vaultKeeps
+    JOIN accounts ON accounts.id = vaultKeeps.creatorId
+    JOIN keeps ON keeps.id = vaultKeeps.keepId
+    LEFT JOIN vaultKeeps vk ON vk.keepId = keeps.id
+WHERE vaultKeeps.id = 3
+GROUP BY(keeps.id);
+
+SELECT
+    keeps.*,
+    COUNT(vaultKeeps.id) AS kept,
+    accounts.*
+FROM keeps
+    JOIN accounts ON keeps.creatorId = accounts.id
+    LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+WHERE keeps.id = 1
+GROUP BY(keeps.id);
+
+SELECT
+    vaultKeeps.*,
+    accounts.*,
+    keeps.*,
+    COUNT(vk.id) AS kept
+FROM vaultKeeps
+    JOIN accounts ON accounts.id = vaultKeeps.creatorId
+    JOIN keeps ON keeps.id = vaultKeeps.keepId
+    LEFT JOIN vaultKeeps vk ON vk.keepId = keeps.id
+WHERE vaultKeeps.vaultId = 40
+GROUP BY(keeps.id);
+
+SELECT * FROM vaultKeeps WHERE vaultId = 130;
+
+SELECT * FROM accounts WHERE id = '6541814359b43990cb08b854';
+
+SELECT * FROM keeps WHERE id = 94;
