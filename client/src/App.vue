@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div>
+    <div class="top-show">
       <Navbar />
     </div>
   </header>
@@ -8,6 +8,9 @@
     <router-view />
   </main>
   <footer>
+    <div class="bottom-show">
+      <BottomNavbar />
+    </div>
   </footer>
   <ActiveKeepModal />
   <CreateVaultModal />
@@ -23,6 +26,7 @@ import ActiveKeepModal from './components/ActiveKeepModal.vue'
 import CreateVaultModal from './components/CreateVaultModal.vue'
 import CreateKeepModal from './components/CreateKeepModal.vue'
 import EditAccountModal from './components/EditAccountModal.vue'
+import BottomNavbar from './components/BottomNavbar.vue'
 
 export default {
   setup() {
@@ -30,7 +34,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, ActiveKeepModal, CreateVaultModal, CreateKeepModal, EditAccountModal }
+  components: { Navbar, ActiveKeepModal, CreateVaultModal, CreateKeepModal, EditAccountModal, BottomNavbar }
 }
 </script>
 <style lang="scss">
@@ -80,7 +84,40 @@ footer {
   height: 32px;
 }
 
+.top-show {
+  display: block;
+}
+
+.bottom-show {
+  display: none;
+}
+
+@media(max-width: 767px) {
+  .top-show {
+    display: none;
+  }
+
+  .bottom-show {
+    display: block;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: #FEF6F0;
+    border-top: 3px solid #e6e4e3 !important;
+
+    z-index: 1250;
+  }
+}
+
 // FIXME FIGURE OUT MASONRY ON MOBILE SIDE BY SIDE STACKING
+// @media(max-width: 767px) {
+//   .masonry-with-columns {
+//     columns: 2 200px !important;
+//     column-gap: 1rem !important;
+//   }
+// }
+
 .masonry-with-columns {
   columns: 4 300px;
   column-gap: 1rem;
@@ -113,6 +150,10 @@ a {
 }
 
 main {
+  background-color: #FEF6F0;
+}
+
+footer {
   background-color: #FEF6F0;
 }
 </style>

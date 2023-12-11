@@ -12,6 +12,8 @@
                             <!-- TODO ADD DISAPPEARING X ON MOBILE -->
                             <div class="col-12 col-md-6  p-0">
                                 <img class=" rounded-start img-fluid keep-img" :src="keep.img" alt="">
+                                <i data-bs-toggle="modal" data-bs-target="#activeKeepModal"
+                                    class="mdi d-flex d-md-none fs-3 x-position mdi-close"></i>
                             </div>
                             <div class="col-12 col-md-6 py-md-4 px-md-5  d-flex flex-column justify-content-between">
                                 <div class="d-flex justify-content-center font-gray">
@@ -34,7 +36,7 @@
                                     </p>
 
                                 </div>
-                                <div class="d-flex justify-content-between">
+                                <div class="d-flex mb-3 justify-content-between">
                                     <div class="d-flex ">
                                         <!-- FIXME really ugly -->
                                         <form v-if="account.id" @submit.prevent="saveKeep()" class="d-flex">
@@ -47,7 +49,8 @@
 
                                             </select>
                                             <!-- FIXME STYLE THIS BUTTON, MODAL AND INPUT -->
-                                            <button type="submit" class="btn btn-purple text-white">Save</button>
+                                            <button :disabled="selectedVault == ''" type="submit"
+                                                class="btn btn-secondary text-white">Save</button>
                                         </form>
                                     </div>
                                     <div class="d-flex align-items-center" role="button" v-if="keep.creatorId == account.id"
@@ -127,8 +130,14 @@ export default {
     height: 60vh;
 }
 
-.btn-purple {
-    background-color: #A277D9;
+.x-position {
+    position: absolute;
+    top: 1%;
+    right: 2%;
+}
+
+.btn-secondary {
+    background-color: #877A8F;
 }
 
 .keep-img {
@@ -138,6 +147,12 @@ export default {
     object-position: center;
 }
 
+@media(max-width: 767px) {
+    .keep-img {
+        height: 50vh;
+        width: 100%;
+    }
+}
 
 
 .profile-img {

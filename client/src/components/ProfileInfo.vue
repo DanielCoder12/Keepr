@@ -67,7 +67,29 @@ export default {
 
 .btn-position {
     position: relative;
-    top: 6.8rem;
+    top: 7rem;
+}
+
+@media(max-width: 767px) {
+    .background-img {
+        height: 13rem;
+    }
+
+    .btn-position {
+        top: 6rem !important;
+    }
+
+    .position {
+        top: 8rem !important;
+    }
+
+    .accPosition {
+        top: 7.8rem !important;
+    }
+
+    .profile-img {
+        height: 6rem !important;
+    }
 }
 
 .position {

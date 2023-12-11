@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <section class="row d-flex justify-content-center">
+    <section class="row d-flex mb-5 mb-md-3 justify-content-center">
       <div class="col-11">
         <section class="row ">
           <div class="col-12 mt-4">

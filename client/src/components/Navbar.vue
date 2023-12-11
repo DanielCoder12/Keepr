@@ -4,12 +4,12 @@
     <div class="d-flex common-width align-items-center">
 
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-        <button class="btn btn-primary rounded">Home</button>
+        <button class="btn btn-light oxygen fw-bold py-1 rounded">Home</button>
 
       </router-link>
       <div v-if="account.id" class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-          aria-expanded="false">
+        <button class="btn fw-bold oxygen dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
           Create
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -69,6 +69,11 @@ export default {
 <style scoped>
 a:hover {
   text-decoration: none;
+}
+
+.btn-light {
+  background-color: #E9D8D6;
+  border: none;
 }
 
 .logo-border {

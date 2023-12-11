@@ -2,7 +2,7 @@
     <!-- FIXME THIS PAGE BROKEN TOO 😢 -->
     <div class="container-fluid">
         <section class="row d-flex justify-content-center">
-            <div class="col-3 mt-4">
+            <div class="col-12 col-md-3 mt-4">
                 <div class="vault-img font-shadow d-flex flex-column justify-content-end rounded text-white text-center"
                     :style="{ backgroundImage: `url(${vault.img})` }">
                     <div>
@@ -22,11 +22,7 @@
                 </div>
 
                 <div v-if="vault.creatorId == account.id" class="text-end">
-                    <!-- FIXME MAKE THIS WHERE YOU DELETE VAULT -->
-                    <!-- <div class="dropdown"> -->
-                    <!-- <button class="btn" type="button" id="dropdownMenuButton"> -->
-                    <!-- </button> -->
-                    <!-- </div> -->
+
                 </div>
                 <div class="text-center oxygen d-flex justify-content-center">
                     <p class="px-3 mt-3 rounded-pill justify-content-center d-flex fs-4 bg-purple">
@@ -35,9 +31,10 @@
                 </div>
             </div>
         </section>
-        <section class="row d-flex justify-content-center">
+        <section class="row d-flex  justify-content-center">
             <!-- FIXME MASONRY ONLY GOES TO HALF OF ITS CONTAINER?? -->
-            <div class="col-8">
+            <!-- FIXME ON MOBILE MAKE MASONRY TWO ROWS -->
+            <div class="col-12 mb-5 mb-md-3 col-md-8">
                 <section class="row ">
                     <div class="col-12 mt-4">
                         <div class="masonry-with-columns">

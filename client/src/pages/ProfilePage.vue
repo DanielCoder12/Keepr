@@ -1,15 +1,15 @@
 <template>
     <div class="container-fluid">
-        <section class="row d-flex justify-content-center mt-5">
-            <div class="col-8">
+        <section class="row d-flex justify-content-center mt-3 mb-5 mb-md-3 mt-md-5">
+            <div class="col-12 col-md-8">
                 <!-- profile info -->
                 <section class="row d-flex justify-content-center">
                     <ProfileInfo />
                 </section>
-                <p class="fs-1 fw-bold oxygen mt-4">Vaults</p>
+                <p class="fs-1 fw-bold oxygen mt-md-4 mt-0">Vaults</p>
                 <!-- profile vaults -->
                 <section class="row">
-                    <div v-for="vault in vaults" :key="vault.id" class="col-4">
+                    <div v-for="vault in vaults" :key="vault.id" class="col-12 col-md-4">
                         <VaultCard :vault="vault" />
                     </div>
                 </section>

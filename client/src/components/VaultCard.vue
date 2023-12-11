@@ -4,7 +4,7 @@
         <div class="w-100">
 
             <div class="d-flex justify-content-between">
-                <p class="m-2 text-white quando font-shadow fs-1">
+                <p class="m-2 text-white quando font-shadow fs-2">
                     {{ vault.name }}
                 </p>
                 <i v-if="vault.isPrivate"
