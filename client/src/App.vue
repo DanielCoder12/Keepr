@@ -47,6 +47,7 @@ footer {
   height: 32px;
 }
 
+// FIXME FIGURE OUT MASONRY ON MOBILE SIDE BY SIDE STACKING
 .masonry-with-columns {
   columns: 4 300px;
   column-gap: 1rem;
@@ -76,5 +77,9 @@ footer {
 
 a {
   user-select: none;
+}
+
+main {
+  background-color: #FEF6F0;
 }
 </style>

@@ -3,8 +3,8 @@
     <!-- FIXME MAKE LOOK GOOD ON MOBILE -->
     <div class="col-11 ">
         <div class="background-img bg-dark rounded text-center" :style="{ backgroundImage: `url(${profile.coverImg})` }">
-            <div class="position">
-                <div class="text-end btn-position">
+            <div :class="{ 'accPosition': $route.name == 'Account', 'position': $route.name != 'Account' }">
+                <div v-if="$route.name == 'Account'" class="text-end btn-position">
                     <!-- FIXME MAKE THIS OPEN EDIT ACCOUNT MODAL -->
                     <div class="dropdown">
                         <button class="btn " type="button" id="accountDropdown" data-bs-toggle="dropdown"
@@ -63,12 +63,17 @@ export default {
 
 .btn-position {
     position: relative;
-    top: 6.5rem;
+    top: 7rem;
 }
 
 .position {
     position: relative;
-    top: 18.5rem;
+    top: 20.8rem;
+}
+
+.accPosition {
+    position: relative;
+    top: 17.5rem;
 }
 
 .profile-img {

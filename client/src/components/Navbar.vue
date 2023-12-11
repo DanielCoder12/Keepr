@@ -7,7 +7,7 @@
         <button class="btn btn-primary rounded">Home</button>
 
       </router-link>
-      <div class="dropdown">
+      <div v-if="account.id" class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
           aria-expanded="false">
           Create
@@ -25,9 +25,9 @@
     <div>
       <!-- FIXME PLACEHOLDER LOGO PLEASE FIND A WAY TO IMPORT THE REAL ONE -->
       <div class="d-flex ps-2 pe-4 flex-column border border-dark rounded">
-        <p class="mb-0">the</p>
-        <p class="mb-0">keepr</p>
-        <p class="mb-0">co.</p>
+        <p class="mb-0 no-select">the</p>
+        <p class="mb-0 no-select">keepr</p>
+        <p class="mb-1 no-select">co.</p>
       </div>
     </div>
     <div class="common-width">
@@ -39,9 +39,10 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { AppState } from '../AppState';
 export default {
   setup() {
 
@@ -57,7 +58,8 @@ export default {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)
         saveState('theme', theme.value)
-      }
+      },
+      account: computed(() => AppState.account)
     }
   },
   components: { Login }
@@ -69,15 +71,22 @@ a:hover {
   text-decoration: none;
 }
 
+.no-select {
+  user-select: none;
+}
 
 
 .common-width {
   width: 14rem;
 }
 
+p {
+  height: 1.25rem;
+}
+
 .border-bottom {
-  /* border: 4rem solid black; */
   background-color: #FEF6F0;
+  border-bottom: 3px solid #e6e4e3 !important;
 }
 
 .nav-link {

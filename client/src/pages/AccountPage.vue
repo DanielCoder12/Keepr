@@ -1,5 +1,6 @@
 <template>
   <!-- FIXME FIX LOADING OR REMOVE IDK -->
+  <!-- FIXME MOBILE -->
   <div v-if="!account.id">
     loading...
   </div>

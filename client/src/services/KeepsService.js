@@ -28,6 +28,12 @@ class KeepsService {
         AppState.keeps = AppState.keeps.filter(k => k.id != keepId)
     }
 
+    async createKeep(keepData, routePath) {
+        const res = await api.post('api/keeps', keepData)
+        if (routePath == '/' || routePath == '/account') {
+            AppState.keeps.push(new Keep(res.data))
+        }
+    }
 }
 
 export const keepsService = new KeepsService()

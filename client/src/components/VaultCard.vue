@@ -49,5 +49,12 @@ export default {
 .vault-img {
     height: 10rem;
     width: auto;
+    object-fit: cover;
+    object-position: center;
+    transition: .25s;
+}
+
+.vault-img:hover {
+    transform: scale(1.03);
 }
 </style>

@@ -69,6 +69,7 @@ export default {
                     logger.log(editable.value)
                     const vault = await vaultsService.createVault(editable.value)
                     Modal.getOrCreateInstance('#createVaultModal').hide()
+                    editable.value = {}
                     await router.push({ name: 'Vault', params: { vaultId: vault.id } })
                 } catch (error) {
                     Pop.error(error)

@@ -8,16 +8,16 @@
                 class="img-fluid rounded-circle" :src="keep.creator.picture" :alt="keep.creator.name">
         </div>
     </div> -->
-
+    <!-- FIXME FIX BROKEN IMAGES -->
     <div role="button" @click.stop="setActiveKeep(keep.id)" class="image ">
         <img class="w-100 rounded shadow" :src="keep.img" alt="">
         <div class="d-flex px-3 w-100 position justify-content-between">
 
             <p class="align-items-center d-flex mb-0">{{ keep.name }}</p>
-            <span title="see account" v-if="keep.creator.id == account.id" class="text-end"><img role="button"
+            <span v-if="keep.creator.id == account.id" :title="keep.creator.name" class="text-end"><img role="button"
                     @click.stop="redirectToAccountPage()" class="creator-img rounded-circle" :src="keep.creator.picture"
                     :alt="keep.creator.name"></span>
-            <span v-else role="button" title="see profile" @click.stop="redirectToProfilePage(keep.creatorId)"
+            <span v-else role="button" :title="keep.creator.name" @click.stop="redirectToProfilePage(keep.creatorId)"
                 class="text-end"><img role="button" class="creator-img rounded-circle" :src="keep.creator.picture"
                     :alt="keep.creator.name"></span>
         </div>
@@ -80,6 +80,14 @@ export default {
 .creator-img {
     height: 2.5rem;
     aspect-ratio: 1/1;
+}
+
+img:hover {
+    transform: scale(1.03);
+}
+
+img {
+    transition: .25s;
 }
 
 .close-position {
