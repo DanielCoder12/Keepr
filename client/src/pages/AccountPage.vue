@@ -1,6 +1,9 @@
 <template>
-  <!-- FIXME THIS ENTIRE PAGE JUST BROKE 😢 -->
-  <div class="container-fluid">
+  <!-- FIXME FIX LOADING OR REMOVE IDK -->
+  <div v-if="!account.id">
+    loading...
+  </div>
+  <div v-else class="container-fluid">
     <section class="row d-flex justify-content-center mt-5">
       <div class="col-8">
         <!-- profile info -->
@@ -17,8 +20,11 @@
         <!-- profile keeps -->
         <section class="row">
           <p>keeps</p>
-          <div v-for="keep in keeps" :key="keep.id" class="col-4">
-            <KeepCard :keep="keep" />
+          <div class="masonry-with-columns">
+
+            <div v-for="keep in keeps" :key="keep.id" class="col-4">
+              <KeepCard :keep="keep" />
+            </div>
           </div>
         </section>
       </div>
@@ -39,31 +45,32 @@ import { vaultsService } from '../services/VaultsService';
 export default {
   setup() {
     watchEffect(() => {
-      AppState.account.id
-      clearAppState()
+      AppState.account;
+      clearAppState();
       setAccountInAppState(),
         // getAccountVaults(),
-        getActiveKeeps()
-    })
+        getActiveKeeps();
+    });
     function clearAppState() {
-      vaultsService.clearAppState()
+      vaultsService.clearAppState();
     }
     function setAccountInAppState() {
-      accountService.setAccountInAppState()
+      accountService.setAccountInAppState();
     }
     async function getAccountVaults() {
       try {
-        await vaultsService.getAccountVaults()
-      } catch (error) {
-        Pop.error()
+        await vaultsService.getAccountVaults();
+      }
+      catch (error) {
+        Pop.error();
       }
     }
     async function getActiveKeeps() {
       try {
-
-        await keepsService.getProfileKeeps(AppState.account.id)
-      } catch (error) {
-        Pop.error(error)
+        await keepsService.getProfileKeeps(AppState.account.id);
+      }
+      catch (error) {
+        Pop.error(error);
       }
     }
     return {
@@ -72,6 +79,7 @@ export default {
       vaults: computed(() => AppState.accountVaults),
     };
   },
+  components: { ProfileInfo, VaultCard, KeepCard }
 }
 </script>
 

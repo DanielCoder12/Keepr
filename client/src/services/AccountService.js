@@ -14,7 +14,6 @@ class AccountService {
     }
   }
   setAccountInAppState() {
-    logger.log(AppState.account)
     AppState.activeProfile = new Profile(AppState.account)
   }
 }

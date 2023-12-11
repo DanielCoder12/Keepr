@@ -1,4 +1,5 @@
 <template>
+    <!-- FIXME THIS PAGE BROKEN TOO 😢 -->
     <div class="container-fluid">
         <section class="row d-flex justify-content-center">
             <div class="col-3 mt-4">
@@ -7,18 +8,22 @@
                     <h1>{{ vault.name }}</h1>
                     <p>by {{ vault.creator.name }}</p>
                 </div>
+
                 <div class="text-end">
+                    <!-- FIXME MAKE THIS WHERE YOU DELETE VAULT -->
                     <i class="mdi mdi-dots-horizontal"></i>
                 </div>
                 <div class="text-center">
-                    {{ keeps.length }} Keeps
+                    {{ keeps.length }} Keep<span v-if="keeps.length != 1">s</span>
                 </div>
             </div>
             <div>
                 <div class="col-8">
                     <section class="row">
-                        <div v-for="keep in keeps" :key="keep.id" class="col-4">
-                            <KeepCard />
+                        <div class="masonry-with-columns">
+                            <div v-for="keep in keeps" :key="keep.id" class="col-4">
+                                <KeepCard />
+                            </div>
                         </div>
                     </section>
                 </div>

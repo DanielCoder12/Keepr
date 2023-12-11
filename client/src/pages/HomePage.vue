@@ -3,14 +3,14 @@
     <section class="row d-flex justify-content-center">
       <div class="col-11">
         <section class="row ">
-          <!-- <div class="col-12"> -->
-          <!-- <div class="masonry-with-columns"> -->
+          <div class="col-12 mt-4">
+            <div class="masonry-with-columns">
 
-          <div class="col-4" v-for="keep in keeps" :key="keep.id">
-            <KeepCard :keep="keep" />
+              <div class="" v-for="keep in keeps" :key="keep.id">
+                <KeepCard :keep="keep" />
 
-            <!-- </div> -->
-            <!-- </div> -->
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -46,31 +46,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-// .masonry-with-columns {
-//   columns: 4 300px;
-//   column-gap: 1rem;
-
-//   div {
-//     width: 150px;
-//     background: #EC985A;
-//     color: white;
-//     margin: 0 1rem 1rem 0;
-//     display: inline-block;
-//     width: 100%;
-//     // text-align: center;
-//     // font-family: system-ui;
-//     // font-weight: 900;
-//     font-size: 2rem;
-//   }
-
-//   @for $i from 1 through 36 {
-//     div:nth-child(#{$i}) {
-//       $h: (
-//         random(400) + 100) + px;
-//       height: $h;
-//       line-height: $h;
-//     }
-// }
-// }
-</style>
+<style scoped lang="scss"></style>

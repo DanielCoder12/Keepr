@@ -2,9 +2,7 @@
     <div role="button" @click="RedirectToVaultPage(vault.id)" class="vault-img rounded mb-4 d-flex align-items-end"
         :style="{ backgroundImage: `url(${vault.img})` }">
         <div class="w-100">
-            <div v-if="account.id == vault.creatorId" class=" d-flex">
-                <i class="mdi mdi-close-circle-outline fs-5 text-danger delete-position"></i>
-            </div>
+
             <div class="d-flex justify-content-between">
                 <p class="m-2 text-white">
                     {{ vault.name }}

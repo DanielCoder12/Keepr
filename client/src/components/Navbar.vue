@@ -23,7 +23,12 @@
 
     <!-- LOGIN COMPONENT HERE -->
     <div>
-      logo
+      <!-- FIXME PLACEHOLDER LOGO PLEASE FIND A WAY TO IMPORT THE REAL ONE -->
+      <div class="d-flex ps-2 pe-4 flex-column border border-dark rounded">
+        <p class="mb-0">the</p>
+        <p class="mb-0">keepr</p>
+        <p class="mb-0">co.</p>
+      </div>
     </div>
     <div class="common-width">
       <!-- FIXME UGLY -->

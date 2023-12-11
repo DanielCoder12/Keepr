@@ -14,10 +14,17 @@
                     </div>
                 </section>
                 <!-- profile keeps -->
-                <section class="row">
-                    <p>keeps</p>
-                    <div v-for="keep in keeps" :key="keep.id" class="col-4">
-                        <KeepCard :keep="keep" />
+                <section class="row ">
+                    <div class="col-12">
+
+                        <p>keeps</p>
+
+                        <div class="masonry-with-columns">
+
+                            <div v-for="keep in keeps" :key="keep.id" class="col-4">
+                                <KeepCard :keep="keep" />
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
