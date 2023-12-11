@@ -24,12 +24,17 @@ import Pop from '../utils/Pop';
 import { keepsService } from '../services/KeepsService'
 import { AppState } from '../AppState'
 import KeepCard from '../components/KeepCard.vue';
+import { vaultsService } from '../services/VaultsService';
 
 export default {
   setup() {
     onMounted(() => {
+      clearAppState()
       getKeeps();
     });
+    function clearAppState() {
+      vaultsService.clearAppState()
+    }
     async function getKeeps() {
       try {
         await keepsService.getKeeps();

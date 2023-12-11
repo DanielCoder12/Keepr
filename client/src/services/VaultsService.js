@@ -46,6 +46,17 @@ class VaultsService {
 
     }
 
+    async deleteVault(vaultId) {
+        await api.delete(`api/vaults/${vaultId}`)
+        AppState.accountVaults = AppState.accountVaults.filter(v => v.id != vaultId)
+    }
+
+    async createVault(vaultData) {
+        logger.log(vaultData)
+        const res = await api.post('api/vaults', vaultData)
+        AppState.accountVaults.push(new Vault(res.data))
+        return new Vault(res.data)
+    }
 }
 
 export const vaultsService = new VaultsService()

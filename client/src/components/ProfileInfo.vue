@@ -6,14 +6,26 @@
             <div class="position">
                 <div class="text-end btn-position">
                     <!-- FIXME MAKE THIS OPEN EDIT ACCOUNT MODAL -->
-                    <i class="mdi me-3 fs-4 mdi-dots-horizontal"></i>
+                    <div class="dropdown">
+                        <button class="btn " type="button" id="accountDropdown" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="mdi me-3 fs-4 mdi-dots-horizontal"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                            <a data-bs-toggle="modal" data-bs-target="#editAccountModal" class="dropdown-item">Edit
+                                Account</a>
+                        </div>
+                    </div>
                 </div>
                 <img class="rounded-circle profile-img" :src="profile.picture" alt="profile picture">
                 <p class=" mb-0">
                     {{ profile.name }}
                 </p>
                 <p class=" mb-0">
-                    {{ vaults.length }} Vaults | {{ keeps.length }} Keeps
+                    <span v-if="$route.name != 'Account'">{{ vaults.length }}</span> <span v-else>{{ accVaults.length
+                    }}</span> Vault<span
+                        v-if="vaults.length != 1 && $route.name == 'Account' || accVaults.length != 1 && $route.name != 'Account'">s</span>
+                    | {{ keeps.length }} Keep<span v-if="keeps.length != 1">s</span>
                 </p>
             </div>
 
@@ -23,12 +35,17 @@
 
 
 <script>
+import { useRoute } from 'vue-router';
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted } from 'vue';
 export default {
 
     setup() {
+        // route = useRoute()
         return {
+            // route,
+            // myRoute: computed(() => this.$route.name),
+            accVaults: computed(() => AppState.accountVaults),
             profile: computed(() => AppState.activeProfile),
             vaults: computed(() => AppState.vaults),
             keeps: computed(() => AppState.keeps)

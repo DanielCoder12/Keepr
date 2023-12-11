@@ -69,6 +69,8 @@ a:hover {
   text-decoration: none;
 }
 
+
+
 .common-width {
   width: 14rem;
 }

@@ -87,6 +87,8 @@ export default {
     height: 60vh;
 }
 
+
+
 .profile-img {
     height: 3rem;
     aspect-ratio: 1/1;

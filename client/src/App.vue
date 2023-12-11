@@ -12,6 +12,7 @@
   <ActiveKeepModal />
   <CreateVaultModal />
   <CreateKeepModal />
+  <EditAccountModal />
 </template>
 
 <script>
@@ -21,6 +22,7 @@ import Navbar from './components/Navbar.vue'
 import ActiveKeepModal from './components/ActiveKeepModal.vue'
 import CreateVaultModal from './components/CreateVaultModal.vue'
 import CreateKeepModal from './components/CreateKeepModal.vue'
+import EditAccountModal from './components/EditAccountModal.vue'
 
 export default {
   setup() {
@@ -28,7 +30,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, ActiveKeepModal, CreateVaultModal, CreateKeepModal }
+  components: { Navbar, ActiveKeepModal, CreateVaultModal, CreateKeepModal, EditAccountModal }
 }
 </script>
 <style lang="scss">
@@ -70,5 +72,9 @@ footer {
       // line-height: $h;
     }
   }
+}
+
+a {
+  user-select: none;
 }
 </style>

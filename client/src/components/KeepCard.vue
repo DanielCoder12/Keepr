@@ -14,13 +14,15 @@
         <div class="d-flex px-3 w-100 position justify-content-between">
 
             <p class="align-items-center d-flex mb-0">{{ keep.name }}</p>
-            <span title="see account" v-if="keep.creatorId == account.id" class="text-end"><img role="button"
+            <span title="see account" v-if="keep.creator.id == account.id" class="text-end"><img role="button"
                     @click.stop="redirectToAccountPage()" class="creator-img rounded-circle" :src="keep.creator.picture"
                     :alt="keep.creator.name"></span>
             <span v-else role="button" title="see profile" @click.stop="redirectToProfilePage(keep.creatorId)"
                 class="text-end"><img role="button" class="creator-img rounded-circle" :src="keep.creator.picture"
                     :alt="keep.creator.name"></span>
         </div>
+        <i @click.stop="deleteKeep(keep.id)" v-if="keep.creatorId == account.id" role="button" title="delete keep"
+            class="mdi close-position mdi-close-circle fs-4 text-danger"></i>
     </div>
 </template>
 
@@ -59,6 +61,14 @@ export default {
             },
             redirectToProfilePage(profileId) {
                 router.push({ name: 'Profile', params: { profileId } })
+            },
+            async deleteKeep(keepId) {
+                try {
+                    const yes = await Pop.confirm('Are you sure you would like to delete this keep?')
+                    await keepsService.deleteKeep(keepId)
+                } catch (error) {
+                    Pop.error(error)
+                }
             }
         }
     }
@@ -72,6 +82,11 @@ export default {
     aspect-ratio: 1/1;
 }
 
+.close-position {
+    position: absolute;
+    top: -1rem;
+    right: -.5rem;
+}
 
 
 .image {

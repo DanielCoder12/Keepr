@@ -6,27 +6,41 @@
                 <div class="vault-img d-flex flex-column justify-content-end rounded text-white text-center"
                     :style="{ backgroundImage: `url(${vault.img})` }">
                     <h1>{{ vault.name }}</h1>
-                    <p>by {{ vault.creator.name }}</p>
+                    <p>by {{ vault.creator?.name }}</p>
                 </div>
 
-                <div class="text-end">
+                <div v-if="vault.creatorId == account.id" class="text-end">
                     <!-- FIXME MAKE THIS WHERE YOU DELETE VAULT -->
-                    <i class="mdi mdi-dots-horizontal"></i>
+                    <div class="dropdown">
+                        <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a @click="deleteVault(vault.id)" class="dropdown-item text-danger">Delete Vault</a>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="text-center">
                     {{ keeps.length }} Keep<span v-if="keeps.length != 1">s</span>
                 </div>
             </div>
-            <div>
-                <div class="col-8">
-                    <section class="row">
+        </section>
+        <section class="row d-flex justify-content-center">
+            <!-- FIXME MASONRY ONLY GOES TO HALF OF ITS CONTAINER?? -->
+            <div class="col-8">
+                <section class="row ">
+                    <div class="col-12 mt-4">
                         <div class="masonry-with-columns">
-                            <div v-for="keep in keeps" :key="keep.id" class="col-4">
-                                <KeepCard />
+
+                            <div class="" v-for="keep in keeps" :key="keep.id">
+                                <KeepCard :keep="keep" />
+
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </section>
     </div>
@@ -34,18 +48,21 @@
 
 
 <script>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted, watchEffect } from 'vue';
 import Pop from '../utils/Pop';
 import { vaultsService } from '../services/VaultsService';
 import KeepCard from '../components/KeepCard.vue';
+import { router } from '../router';
+import { logger } from '../utils/Logger';
 export default {
     setup() {
         const route = useRoute();
-        watchEffect(() => {
-            route,
-                clearAppState();
+        const router = useRouter();
+        onMounted(() => {
+            // route,
+            clearAppState();
             getVaultById();
             getKeepsByVaultId();
         });
@@ -58,10 +75,15 @@ export default {
             }
             catch (error) {
                 Pop.error(error);
+                // logger.log(error.response.data)
+                if (error.response.data.includes('invalid id') || error.response.data == 'Private Vault') {
+                    router.push({ path: '/' })
+                }
             }
         }
         async function getKeepsByVaultId() {
             try {
+
                 await vaultsService.getKeepsByVaultId(route.params.vaultId);
             }
             catch (error) {
@@ -69,8 +91,23 @@ export default {
             }
         }
         return {
+            router,
             vault: computed(() => AppState.activeVault),
-            keeps: computed(() => AppState.keeps)
+            keeps: computed(() => AppState.keeps),
+            account: computed(() => AppState.account),
+            async deleteVault(vaultId) {
+                try {
+                    const yes = await Pop.confirm("Are you sure you would like to delete this Vault?")
+                    if (!yes) {
+                        return
+                    }
+                    await vaultsService.deleteVault(vaultId)
+                    router.push({ path: '/' })
+                    Pop.success('vault Deleted')
+                } catch (error) {
+                    Pop.error(error)
+                }
+            }
         };
     },
     components: { KeepCard }
