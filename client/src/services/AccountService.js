@@ -16,6 +16,11 @@ class AccountService {
   setAccountInAppState() {
     AppState.activeProfile = new Profile(AppState.account)
   }
+
+  async editAccount(accountData) {
+    const res = await api.put('/account', accountData)
+    AppState.account = new Account(res.data)
+  }
 }
 
 export const accountService = new AccountService()

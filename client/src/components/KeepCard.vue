@@ -10,10 +10,10 @@
     </div> -->
     <!-- FIXME FIX BROKEN IMAGES -->
     <div role="button" @click.stop="setActiveKeep(keep.id)" class="image ">
-        <img class="w-100 rounded shadow" :src="keep.img" alt="">
+        <img class="w-100 rounded card-shadow" :src="keep.img" alt="">
         <div class="d-flex px-3 w-100 position justify-content-between">
 
-            <p class="align-items-center d-flex mb-0">{{ keep.name }}</p>
+            <p class="align-items-center d-flex mb-0 marko-one font-shadow fs-3">{{ keep.name }}</p>
             <span v-if="keep.creator.id == account.id" :title="keep.creator.name" class="text-end"><img role="button"
                     @click.stop="redirectToAccountPage()" class="creator-img rounded-circle" :src="keep.creator.picture"
                     :alt="keep.creator.name"></span>
@@ -78,7 +78,7 @@ export default {
 
 <style lang="scss" scoped>
 .creator-img {
-    height: 2.5rem;
+    height: 3rem;
     aspect-ratio: 1/1;
 }
 

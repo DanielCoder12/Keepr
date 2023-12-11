@@ -24,10 +24,10 @@
     <!-- LOGIN COMPONENT HERE -->
     <div>
       <!-- FIXME PLACEHOLDER LOGO PLEASE FIND A WAY TO IMPORT THE REAL ONE -->
-      <div class="d-flex ps-2 pe-4 flex-column border border-dark rounded">
-        <p class="mb-0 no-select">the</p>
-        <p class="mb-0 no-select">keepr</p>
-        <p class="mb-1 no-select">co.</p>
+      <div class="d-flex ps-2 pe-4 flex-column fw-bold logo-border rounded">
+        <p class="mb-0 no-select marko-one">the</p>
+        <p class="mb-0 no-select marko-one">keepr</p>
+        <p class="mb-1 no-select marko-one">co.</p>
       </div>
     </div>
     <div class="common-width">
@@ -69,6 +69,10 @@ export default {
 <style scoped>
 a:hover {
   text-decoration: none;
+}
+
+.logo-border {
+  border: 2px solid black;
 }
 
 .no-select {

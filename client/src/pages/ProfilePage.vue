@@ -6,7 +6,7 @@
                 <section class="row d-flex justify-content-center">
                     <ProfileInfo />
                 </section>
-                <p>Vaults</p>
+                <p class="fs-1 fw-bold oxygen mt-4">Vaults</p>
                 <!-- profile vaults -->
                 <section class="row">
                     <div v-for="vault in vaults" :key="vault.id" class="col-4">
@@ -17,7 +17,7 @@
                 <section class="row ">
                     <div class="col-12">
 
-                        <p>keeps</p>
+                        <p class="fs-1 fw-bold oxygen mt-3">keeps</p>
 
                         <div class="masonry-with-columns">
 

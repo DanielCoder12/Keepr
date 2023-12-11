@@ -2,23 +2,24 @@
     <!-- FIXME IF NO BACKGROUND IMAGE MAKE LOOK BETTER -->
     <!-- FIXME MAKE LOOK GOOD ON MOBILE -->
     <div class="col-11 ">
-        <div class="background-img bg-dark rounded text-center" :style="{ backgroundImage: `url(${profile.coverImg})` }">
+        <div class="background-img rounded text-center"
+            :style="{ backgroundImage: `url(${profile.coverImg ? profile.coverImg : 'https://www.fuller.edu/wp-content/uploads/2022/11/secondary-banner-placeholder.jpg'})` }">
             <div :class="{ 'accPosition': $route.name == 'Account', 'position': $route.name != 'Account' }">
                 <div v-if="$route.name == 'Account'" class="text-end btn-position">
                     <!-- FIXME MAKE THIS OPEN EDIT ACCOUNT MODAL -->
-                    <div class="dropdown">
-                        <button class="btn " type="button" id="accountDropdown" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="mdi me-3 fs-4 mdi-dots-horizontal"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-                            <a data-bs-toggle="modal" data-bs-target="#editAccountModal" class="dropdown-item">Edit
-                                Account</a>
-                        </div>
+                    <!-- <div class="dropdown"> -->
+                    <!-- <button class="btn " type="button" id="accountDropdown" > -->
+                    <i role="button" title="account options" class="mdi me-3  fs-4 mdi-dots-horizontal"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                    <!-- </button> -->
+                    <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                        <a data-bs-toggle="modal" data-bs-target="#editAccountModal" class="dropdown-item">Edit
+                            Account</a>
+                        <!-- </div> -->
                     </div>
                 </div>
                 <img class="rounded-circle profile-img" :src="profile.picture" alt="profile picture">
-                <p class=" mb-0">
+                <p class=" mb-0 fs-1 oxygen">
                     {{ profile.name }}
                 </p>
                 <p class=" mb-0">
@@ -58,12 +59,15 @@ export default {
 <style lang="scss" scoped>
 .background-img {
     height: 25rem;
-    margin-bottom: 7rem;
+    margin-bottom: 9rem;
+    object-fit: cover;
+    object-position: center;
+    background-position: center;
 }
 
 .btn-position {
     position: relative;
-    top: 7rem;
+    top: 6.8rem;
 }
 
 .position {
@@ -73,7 +77,7 @@ export default {
 
 .accPosition {
     position: relative;
-    top: 17.5rem;
+    top: 18.5rem;
 }
 
 .profile-img {
@@ -81,5 +85,8 @@ export default {
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: center;
+    border: 2px solid white;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.43);
+
 }
 </style>

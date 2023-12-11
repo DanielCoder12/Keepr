@@ -40,6 +40,39 @@ export default {
   --main-height: calc(100vh - 32px - 64px);
 }
 
+.marko-one {
+  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Marko One', serif;
+  font-family: 'Sahitya', serif;
+}
+
+.oxygen {
+  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Marko One', serif;
+  font-family: 'Oxygen', sans-serif;
+  font-family: 'Sahitya', serif;
+}
+
+.quando {
+  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Marko One', serif;
+  font-family: 'Oxygen', sans-serif;
+  font-family: 'Quando', serif;
+  font-family: 'Sahitya', serif;
+}
+
+.font-shadow {
+  text-shadow: 1px 1px 8px black;
+}
+
+.card-shadow {
+  box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.188);
+}
+
+.font-gray {
+  color: #636E72;
+}
+
 
 footer {
   display: grid;

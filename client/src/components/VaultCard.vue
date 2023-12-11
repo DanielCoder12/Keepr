@@ -1,13 +1,14 @@
 <template>
-    <div role="button" @click="RedirectToVaultPage(vault.id)" class="vault-img rounded mb-4 d-flex align-items-end"
-        :style="{ backgroundImage: `url(${vault.img})` }">
+    <div role="button" @click="RedirectToVaultPage(vault.id)"
+        class="vault-img card-shadow rounded mb-4 d-flex align-items-end" :style="{ backgroundImage: `url(${vault.img})` }">
         <div class="w-100">
 
             <div class="d-flex justify-content-between">
-                <p class="m-2 text-white">
+                <p class="m-2 text-white quando font-shadow fs-1">
                     {{ vault.name }}
                 </p>
-                <i v-if="vault.isPrivate" class="mdi mdi-lock m-2"></i>
+                <i v-if="vault.isPrivate"
+                    class="mdi d-flex align-items-center text-white font-shadow fs-2 mdi-lock-outline m-2"></i>
             </div>
         </div>
     </div>
@@ -52,6 +53,7 @@ export default {
     object-fit: cover;
     object-position: center;
     transition: .25s;
+    background-position: center;
 }
 
 .vault-img:hover {

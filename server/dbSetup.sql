@@ -124,3 +124,24 @@ SELECT * FROM vaultKeeps WHERE vaultId = 130;
 SELECT * FROM accounts WHERE id = '6541814359b43990cb08b854';
 
 SELECT * FROM keeps WHERE id = 94;
+
+SELECT
+    vaultKeeps.*,
+    accounts.*,
+    keeps.*,
+    COUNT(vk.id) AS kept
+FROM vaultKeeps
+    JOIN accounts ON accounts.id = vaultKeeps.creatorId
+    JOIN keeps ON keeps.id = vaultKeeps.keepId
+    LEFT JOIN vaultKeeps vk ON vk.keepId = keeps.id
+WHERE vaultKeeps.vaultId = 64
+GROUP BY(keeps.id);
+
+UPDATE accounts
+SET
+    name = 'minecraft',
+    picture = 'https://s.gravatar.com/avatar/c679f0317f1920dc6165123424752ae1?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fmi.png',
+    coverImg = 'https://plus.unsplash.com/premium_photo-1701188698374-c5e24b3fbeab?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+WHERE
+    id = '6541814359b43990cb08b854'
+LIMIT 1;

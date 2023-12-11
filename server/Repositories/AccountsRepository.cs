@@ -38,8 +38,9 @@ public class AccountsRepository
             UPDATE accounts
             SET 
               name = @Name,
-              picture = @Picture
-            WHERE id = @Id;";
+              picture = @Picture,
+              coverImg = @coverImg
+            WHERE accounts.id = @Id LIMIT 1;";
     _db.Execute(sql, update);
     return update;
   }

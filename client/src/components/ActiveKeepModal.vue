@@ -14,7 +14,7 @@
                                 <img class=" rounded-start img-fluid keep-img" :src="keep.img" alt="">
                             </div>
                             <div class="col-12 col-md-6 py-md-4 px-md-5  d-flex flex-column justify-content-between">
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center font-gray">
                                     <p class="me-2 fs-5">
                                         <i class="mdi mdi-eye"></i>
                                         {{ keep.views }}
@@ -26,10 +26,10 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <p class="text-center fs-2 fw-bold">
+                                    <p class="text-center marko-one fs-1 fw-bold">
                                         {{ keep.name }}
                                     </p>
-                                    <p>
+                                    <p class="font-gray">
                                         {{ keep.description }}
                                     </p>
 
@@ -39,10 +39,11 @@
                                         <!-- FIXME really ugly -->
                                         <form v-if="account.id" @submit.prevent="saveKeep()" class="d-flex">
                                             <!-- FIXME MAKE IT SO IF KEEP IS ALREADY IN VAULT IT DOESNT SHOW ON THE FORM -->
-                                            <select v-model="selectedVault" class="form-select "
+                                            <select v-model="selectedVault" class="form-select oxygen "
                                                 aria-label="Default select example">
-                                                <option v-for=" vault in vaults" :value="vault.id" :key="vault.id">{{
-                                                    vault.name }}</option>
+                                                <option v-for=" vault in vaults" class="oxygen" :value="vault.id"
+                                                    :key="vault.id">{{
+                                                        vault.name }}</option>
 
                                             </select>
                                             <!-- FIXME STYLE THIS BUTTON, MODAL AND INPUT -->
@@ -54,7 +55,9 @@
 
                                         <img class="rounded-circle profile-img shadow" :src="keep.creator.picture"
                                             :alt="keep.creator.name">
-                                        {{ keep.creator.name }}
+                                        <p class="mb-0 oxygen ">
+                                            {{ keep.creator.name }}
+                                        </p>
                                     </div>
                                     <div class="d-flex align-items-center" role="button" v-else
                                         @click="redirectToProfilePage()">
