@@ -4,6 +4,10 @@
     <div class="col-11 ">
         <div class="background-img bg-dark rounded text-center" :style="{ backgroundImage: `url(${profile.coverImg})` }">
             <div class="position">
+                <div class="text-end btn-position">
+                    <!-- FIXME MAKE THIS OPEN EDIT ACCOUNT MODAL -->
+                    <i class="mdi me-3 fs-4 mdi-dots-horizontal"></i>
+                </div>
                 <img class="rounded-circle profile-img" :src="profile.picture" alt="profile picture">
                 <p class=" mb-0">
                     {{ profile.name }}
@@ -40,9 +44,14 @@ export default {
     margin-bottom: 7rem;
 }
 
+.btn-position {
+    position: relative;
+    top: 6.5rem;
+}
+
 .position {
     position: relative;
-    top: 21rem;
+    top: 18.5rem;
 }
 
 .profile-img {

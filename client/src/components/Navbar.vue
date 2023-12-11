@@ -13,9 +13,9 @@
           Create
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li data-bs-toggle="modal" data-bs-target="#createKeepModal"><a class="dropdown-item" href="#">New
+          <li data-bs-toggle="modal" data-bs-target="#createKeepModal"><a class="dropdown-item">New
               Keep</a></li>
-          <li data-bs-toggle="modal" data-bs-target="#createVaultModal"><a class="dropdown-item" href="#">New
+          <li data-bs-toggle="modal" data-bs-target="#createVaultModal"><a class="dropdown-item">New
               Vault</a></li>
         </ul>
       </div>

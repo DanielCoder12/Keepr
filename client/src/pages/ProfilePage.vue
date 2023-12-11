@@ -44,10 +44,14 @@ export default {
         const route = useRoute();
         watchEffect(() => {
             route;
+            clearAppState()
             getProfile(),
                 getProfileKeeps(),
                 getProfileVaults();
         });
+        function clearAppState() {
+            vaultsService.clearAppState()
+        }
         async function getProfile() {
             try {
                 await profileService.getProfile(route.params.profileId);
