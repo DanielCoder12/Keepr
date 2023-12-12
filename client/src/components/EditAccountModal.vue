@@ -7,7 +7,8 @@
 
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Account</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" title="close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <!-- FIXME MAKE MAX LENGTHS NOT INSANELY LONG -->
                     <div class="modal-body">

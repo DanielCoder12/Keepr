@@ -136,7 +136,7 @@ export default {
     color: black;
     position: relative;
     top: 2rem;
-    left: 8.6rem;
+    left: 6.6rem;
     text-shadow: none;
 }
 
@@ -151,7 +151,7 @@ export default {
 .lock-position {
     position: relative;
     top: -8rem;
-    left: 10rem;
+    left: 8rem;
 }
 
 .dropdown-position {

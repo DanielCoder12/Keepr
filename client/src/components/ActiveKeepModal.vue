@@ -18,12 +18,12 @@
                             <div
                                 class="col-12 col-md-6 py-md-4 pt-md-4 pb-md-0 bg-cream rounded-end d-flex flex-column justify-content-between">
                                 <div class="d-flex justify-content-center font-gray">
-                                    <p class="me-2 mb-0 fs-5 pt-2">
+                                    <p title="views" class="me-2 mb-0 fs-5 pt-2">
                                         <i class="mdi mdi-eye"></i>
                                         {{ keep.views }}
 
                                     </p>
-                                    <p class="ms-2 mb-0 fs-5 pt-2">
+                                    <p title="times kept" class="ms-2 mb-0 fs-5 pt-2">
                                         <i class="mdi mdi-alpha-k-box-outline"></i>
                                         {{ keep.kept }}
                                     </p>

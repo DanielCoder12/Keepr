@@ -8,7 +8,7 @@
                     <section class="row">
                         <div class="col-12 p-3">
                             <h2 class="oxygen text-color">Add your keep</h2>
-                            <div class="position">
+                            <div title="close" class="position">
                                 <i class="mdi mdi-close fs-4 p-3 "></i>
                             </div>
                         </div>
