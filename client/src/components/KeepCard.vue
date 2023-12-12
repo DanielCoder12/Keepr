@@ -10,7 +10,9 @@
     </div> -->
     <!-- FIXME FIX BROKEN IMAGES -->
     <div role="button" @click.stop="setActiveKeep(keep.id)" class="image ">
-        <img class="w-100 rounded card-shadow" :src="keep.img" alt="">
+        <img v-if="didLoad" @error="loadFailed(keep.id)" class="w-100 rounded card-shadow" :src="keep.img" alt="">
+        <img v-else class="w-100 rounded card-shadow" src="https://www.drupal.org/files/project-images/broken-image.jpg"
+            alt="">
         <div class="d-flex px-3 w-100 position justify-content-between">
 
             <p class="align-items-center text-break d-flex mb-0 marko-one font-shadow fs-3">{{ keep.name }}</p>
@@ -29,7 +31,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted } from 'vue';
+import { computed, reactive, onMounted, ref } from 'vue';
 import { Keep } from '../models/Keep';
 import Pop from '../utils/Pop';
 import { Modal } from 'bootstrap';
@@ -44,8 +46,10 @@ export default {
     },
     setup() {
         const router = useRouter()
+        let didLoad = ref(true)
 
         return {
+            didLoad,
             router,
             account: computed(() => AppState.account),
             async setActiveKeep(keepId) {
@@ -74,6 +78,9 @@ export default {
                 } catch (error) {
                     Pop.error(error)
                 }
+            },
+            loadFailed() {
+                didLoad.value = false
             }
         }
     }

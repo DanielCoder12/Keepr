@@ -6,8 +6,7 @@
     </button>
     <div v-else>
       <div class="dropdown d-flex justify-content-end rounded-circle my-2 my-lg-0">
-        <div type="button" class="bg-dark rounded-circle border-0 selectable no-select" data-bs-toggle="dropdown"
-          aria-expanded="false">
+        <div type="button" class="bg-dark rounded-circle border-0 selectable no-select" data-bs-toggle="dropdown">
           <div v-if="account.picture || user.picture">
             <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded-circle photo" />
           </div>
@@ -51,6 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// FIXME FIX ASPECT RATIO TO GET BETTER BEST PRACTICES SCORE
 .photo {
   aspect-ratio: 1/1;
   object-fit: cover;

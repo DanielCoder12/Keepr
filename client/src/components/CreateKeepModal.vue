@@ -7,7 +7,7 @@
                 <div class="container-fluid">
                     <section class="row">
                         <div class="col-12 p-3">
-                            <h2>Add your keep</h2>
+                            <h2 class="oxygen text-color">Add your keep</h2>
                             <div class="position">
                                 <i class="mdi mdi-close fs-4 p-3 "></i>
                             </div>
@@ -17,16 +17,18 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Title</label>
                                     <input required maxlength="30" v-model="editable.name" placeholder="Title..."
-                                        type="text" class="form-control" id="name" aria-describedby="nameHelp">
+                                        type="text" class="form-control bg-gray" id="keepNameHelp"
+                                        aria-describedby="keepNameHelp">
                                 </div>
                                 <div class="mb-5">
                                     <label for="img" class="form-label">Image Url</label>
                                     <input required maxlength="500" v-model="editable.img" placeholder="Image Url..."
-                                        type="url" class="form-control" id="img" aria-describedby="imgHelp">
+                                        type="url" class="form-control bg-gray" id="keepImgHelp"
+                                        aria-describedby="keepImgHelp">
                                 </div>
                                 <div>
                                     <textarea required maxlength="500" v-model="editable.description"
-                                        placeholder="Keep Description..." class="w-100 mt-5"></textarea>
+                                        placeholder="Keep Description..." class="w-100 bg-gray mt-5"></textarea>
                                 </div>
                                 <div class="text-end mt-4">
                                     <button type="submit" class="btn btn-dark text-white">Create</button>
@@ -77,8 +79,12 @@ export default {
 
 
 <style lang="scss" scoped>
-bg-gray {
+.bg-gray {
     background-color: #F9F6FA;
+}
+
+.text-color {
+    color: #636E72;
 }
 
 .position {

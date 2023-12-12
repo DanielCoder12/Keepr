@@ -3,14 +3,14 @@
     <div class="container-fluid">
         <section class="row d-flex justify-content-center">
             <div class="col-12 col-md-3 mt-4">
-                <div class="vault-img font-shadow position-relative d-flex flex-column justify-content-end rounded text-white text-center"
+                <div class="vault-img position-relative d-flex flex-column justify-content-end rounded text-white text-center"
                     :style="{ backgroundImage: `url(${vault.img})` }">
-                    <div class="quando title-position">
+                    <div class="quando font-shadow  title-position">
                         <h1 class="text-break fs-2">{{ vault.name }} </h1>
                         <p>by {{ vault.creator?.name }}</p>
                     </div>
                     <div>
-                        <i v-if="vault.isPrivate" class="mdi text-white fs-3 lock-position mdi-lock"></i>
+                        <i v-if="vault.isPrivate" class="mdi font-shadow  text-white fs-3 lock-position mdi-lock"></i>
                         <i v-if="vault.creatorId == account.id" role="button" title="vault options"
                             class="mdi mdi-dots-horizontal position" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"></i>

@@ -5,7 +5,7 @@
                 <div class="container-fluid ">
                     <section class="row">
                         <div class="col-12 p-3">
-                            <h2>Add your vault</h2>
+                            <h2 class="oxygen text-color">Add your vault</h2>
                             <div class="position">
                                 <i class="mdi mdi-close  fs-4 px-3"></i>
                             </div>
@@ -15,23 +15,25 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Title</label>
                                     <input required maxlength="20" v-model="editable.name" placeholder="Title..."
-                                        type="text" class="form-control" id="name" aria-describedby="nameHelp">
+                                        type="text" class="form-control bg-gray" id="vaultNameHelp"
+                                        aria-describedby="vaultNameHelp">
                                 </div>
                                 <div class="mb-5">
                                     <label for="img" class="form-label">Image Url</label>
                                     <input required maxlength="500" v-model="editable.img" placeholder="Image Url..."
-                                        type="url" class="form-control" id="img" aria-describedby="imgHelp">
+                                        type="url" class="form-control bg-gray" id="vaultImgHelp"
+                                        aria-describedby="vaultImgHelp">
                                 </div>
                                 <div>
                                     <textarea required maxlength="500" v-model="editable.description"
-                                        placeholder="Vault Description..." class="w-100 mt-5"></textarea>
+                                        placeholder="Vault Description..." class="w-100 mt-5 bg-gray"></textarea>
                                 </div>
                                 <div class="text-end mt-4">
                                     <div id="emailHelp" class="form-text">Private Vaults can only be seen by you
                                     </div>
                                     <div class="form-check d-flex justify-content-end">
 
-                                        <input v-model="editable.isPrivate" class="form-check-input" type="checkbox"
+                                        <input v-model="editable.isPrivate" class="form-check-input bg-gray" type="checkbox"
                                             value="" id="flexCheckDefault">
                                         <label class="form-check-label ms-2" for="flexCheckDefault">
                                             Make Vault Private?
@@ -97,6 +99,14 @@ export default {
 <style lang="scss" scoped>
 textarea {
     resize: none;
+}
+
+.bg-gray {
+    background-color: #F9F6FA;
+}
+
+.text-color {
+    color: #636E72;
 }
 
 .position {

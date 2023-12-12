@@ -23,9 +23,10 @@
                     {{ profile.name }}
                 </p>
                 <p class=" mb-0">
+                    <!-- FIXME FIX THE S ON VAULTS -->
                     <span v-if="$route.name != 'Account'">{{ vaults.length }}</span> <span v-else>{{ accVaults.length
                     }}</span> Vault<span
-                        v-if="vaults.length != 1 && $route.name == 'Account' || accVaults.length != 1 && $route.name != 'Account'">s</span>
+                        v-if="accVaults.length != 1 && $route.name == 'Account' || vaults.length != 1 && $route.name != 'Account'">s</span>
                     | {{ keeps.length }} Keep<span v-if="keeps.length != 1">s</span>
                 </p>
             </div>
