@@ -1,7 +1,7 @@
 import { variationPlacements } from "@popperjs/core"
 import { AppState } from "../AppState"
 import { Vault } from "../models/Vault"
-import { logger } from "../utils/Logger"
+// import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 import { Keep } from "../models/Keep"
 import { VaultKeep } from "../models/VaultKeep"
@@ -10,26 +10,26 @@ class VaultsService {
 
     async getProfileVaults(vaultId) {
         const res = await api.get(`api/profiles/${vaultId}/vaults`)
-        logger.log('vaults', res.data)
+        // logger.log('vaults', res.data)
         AppState.vaults = res.data.map(v => new Vault(v))
     }
 
     async getAccountVaults() {
         const res = await api.get('account/vaults')
-        logger.log(res.data)
+        // logger.log(res.data)
         // AppState.vaults = res.data.map(v => new Vault(v))
         AppState.accountVaults = res.data.map(v => new Vault(v))
     }
 
     async getKeepsByVaultId(vaultId) {
         const res = await api.get(`api/vaults/${vaultId}/keeps`)
-        logger.log('keeps in vault', res.data)
+        // logger.log('keeps in vault', res.data)
         AppState.keeps = res.data.map(k => new Keep(k))
     }
 
     async getVaultById(vaultId) {
         const res = await api.get(`api/vaults/${vaultId}`)
-        logger.log('vault', res.data)
+        // logger.log('vault', res.data)
         AppState.activeVault = new Vault(res.data)
     }
 
@@ -43,7 +43,7 @@ class VaultsService {
     async saveKeepToVault(vaultId, keepId) {
         const vaultKeepData = { vaultId, keepId }
         const res = await api.post('api/vaultkeeps', vaultKeepData)
-        logger.log('vault keep created', res.data)
+        // logger.log('vault keep created', res.data)
         AppState.vaultsWithActiveKeep.push(new VaultKeep({ id: null, vaultId, keepId, creatorId: AppState.account.id }))
     }
 
@@ -53,7 +53,7 @@ class VaultsService {
     }
 
     async createVault(vaultData) {
-        logger.log(vaultData)
+        // logger.log(vaultData)
         const res = await api.post('api/vaults', vaultData)
         AppState.accountVaults.push(new Vault(res.data))
         return new Vault(res.data)
@@ -61,7 +61,7 @@ class VaultsService {
 
     async getVaultIdsKeepsAreIn(keepId) {
         const res = await api.get(`api/keeps/${keepId}/vaultKeeps`)
-        logger.log('vault keeps', res.data)
+        // logger.log('vault keeps', res.data)
         AppState.vaultsWithActiveKeep = res.data.map(vk => new VaultKeep(vk))
     }
     async removeKeepFromVault(vaultKeepId) {
@@ -74,6 +74,14 @@ class VaultsService {
     }
     changeEditStatusFalse() {
         AppState.isEditing = false
+    }
+
+
+    async editVault(vaultData, vaultId) {
+        const res = await api.put(`api/vaults/${vaultId}`, vaultData)
+        AppState.activeVault = new Vault(res.data)
+        const index = AppState.accountVaults.findIndex(v => v.id == vaultId)
+        AppState.accountVaults.splice(index, 1, new Vault(res.data))
     }
 }
 

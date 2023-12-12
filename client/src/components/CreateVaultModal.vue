@@ -11,7 +11,7 @@
                             </div>
                         </div>
                         <div class="col-12 p-3">
-                            <form @submit.prevent="createVault()">
+                            <form @submit.prevent="editOrCreate()">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Title</label>
                                     <input required maxlength="20" v-model="editable.name" placeholder="Title..."
@@ -39,7 +39,9 @@
                                             Make Vault Private?
                                         </label>
                                     </div>
-                                    <button type="submit" class="btn px-5 btn-dark text-white">Create Vault</button>
+                                    <button v-if="isEditing == false" type="submit"
+                                        class="btn px-5 btn-dark text-white">Create Vault</button>
+                                    <button v-else type="submit" class="btn px-5 btn-dark text-white">Save Vault</button>
                                 </div>
                             </form>
                         </div>
@@ -55,7 +57,7 @@
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted, ref, watchEffect, onUnmounted, watch, VueElement } from 'vue';
 import Pop from '../utils/Pop';
-import { logger } from '../utils/Logger';
+// import { logger } from '../utils/Logger';
 import { vaultsService } from '../services/VaultsService';
 import { useRouter } from 'vue-router';
 import { Modal } from 'bootstrap';
@@ -79,16 +81,30 @@ export default {
         return {
             editable,
             router,
-            async createVault() {
-                try {
-                    logger.log(editable.value)
-                    const vault = await vaultsService.createVault(editable.value)
-                    Modal.getOrCreateInstance('#createVaultModal').hide()
-                    editable.value = {}
-                    await router.push({ name: 'Vault', params: { vaultId: vault.id } })
-                } catch (error) {
-                    Pop.error(error)
+            isEditing: computed(() => AppState.isEditing),
+            async editOrCreate() {
+                if (AppState.isEditing == false) {
+                    try {
+                        // logger.log(editable.value)
+                        const vault = await vaultsService.createVault(editable.value)
+                        Modal.getOrCreateInstance('#createVaultModal').hide()
+                        editable.value = {}
+                        await router.push({ name: 'Vault', params: { vaultId: vault.id } })
+                    } catch (error) {
+                        Pop.error(error)
+                    }
+
                 }
+                if (AppState.isEditing) {
+
+                    try {
+                        await vaultsService.editVault(editable.value, AppState.activeVault.id)
+                        Modal.getOrCreateInstance('#createVaultModal').hide()
+                    } catch (error) {
+                        Pop.error(error)
+                    }
+                }
+
             }
         }
     }

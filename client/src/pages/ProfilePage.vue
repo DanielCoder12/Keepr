@@ -1,5 +1,8 @@
 <template>
-    <div class="container-fluid">
+    <div v-if="!profile.id">
+        loading...
+    </div>
+    <div v-else class="container-fluid">
         <section class="row d-flex justify-content-center mt-3 mb-5 mb-md-3 mt-md-5">
             <div class="col-12 col-md-8">
                 <!-- profile info -->

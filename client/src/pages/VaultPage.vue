@@ -1,6 +1,9 @@
 <template>
     <!-- FIXME THIS PAGE BROKEN TOO 😢 -->
-    <div class="container-fluid">
+    <div v-if="!vault.id">
+        loading...
+    </div>
+    <div v-else class="container-fluid">
         <section class="row d-flex justify-content-center">
             <div class="col-12 col-md-3 mt-4">
                 <div class="vault-img position-relative d-flex flex-column justify-content-end rounded text-white text-center"
@@ -61,7 +64,7 @@ import Pop from '../utils/Pop';
 import { vaultsService } from '../services/VaultsService';
 import KeepCard from '../components/KeepCard.vue';
 import { router } from '../router';
-import { logger } from '../utils/Logger';
+// import { logger } from '../utils/Logger';
 import { Modal } from 'bootstrap';
 export default {
     setup() {

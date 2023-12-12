@@ -4,13 +4,16 @@
       <div class="col-11">
         <section class="row ">
           <div class="col-12 mt-4">
-            <div class="masonry-with-columns">
+            <section class="row">
 
-              <div class="" v-for="keep in keeps" :key="keep.id">
-                <KeepCard :keep="keep" />
+              <div class="masonry-with-columns">
 
+                <div class="" v-for="keep in keeps" :key="keep.id">
+                  <KeepCard :keep="keep" />
+
+                </div>
               </div>
-            </div>
+            </section>
           </div>
         </section>
       </div>

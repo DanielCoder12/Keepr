@@ -7,7 +7,7 @@ class KeepsService {
 
     async getKeeps() {
         const res = await api.get('api/keeps')
-        logger.log('keeps', res.data)
+        // logger.log('keeps', res.data)
         AppState.keeps = res.data.map(k => new Keep(k))
     }
 
@@ -21,7 +21,7 @@ class KeepsService {
     async getProfileKeeps(profileId) {
 
         const res = await api.get(`api/profiles/${profileId}/keeps`)
-        logger.log('keeps', res.data)
+        // logger.log('keeps', res.data)
         AppState.keeps = res.data.map(k => new Keep(k))
     }
 

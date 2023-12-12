@@ -48,7 +48,8 @@
                                         <!-- FIXME really ugly -->
                                         <div v-else>
 
-                                            <form v-if="account.id" @submit.prevent="saveKeep()" class="d-flex ">
+                                            <form v-if="account.id && filteredVaults.length > 0"
+                                                @submit.prevent="saveKeep()" class="d-flex ">
                                                 <!-- FIXME MAKE IT SO IF KEEP IS ALREADY IN VAULT IT DOESNT SHOW ON THE FORM -->
                                                 <select role="button" v-model="selectedVault"
                                                     class="bg-cream dropdown rounded oxygen "
@@ -69,18 +70,18 @@
                                     <div class="d-flex align-items-center" role="button" v-if="keep.creatorId == account.id"
                                         @click="redirectToAccountPage()">
 
-                                        <img class="rounded-circle profile-img shadow" :src="keep.creator.picture"
-                                            :alt="keep.creator.name">
-                                        <p class="mb-0 fw-bold ps-2 oxygen ">
+                                        <img class="rounded-circle border border-dark profile-img shadow"
+                                            :src="keep.creator.picture" :alt="keep.creator.name">
+                                        <p class="mb-0 fw-bold text-break ps-2 oxygen ">
                                             {{ keep.creator.name }}
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center" role="button" v-else
                                         @click="redirectToProfilePage(keep.creator.id)">
 
-                                        <img class="rounded-circle profile-img shadow" :src="keep.creator.picture"
-                                            :alt="keep.creator.name">
-                                        <p class="mb-0 oxygen ps-2">
+                                        <img class="rounded-circle border border-dark  profile-img shadow"
+                                            :src="keep.creator.picture" :alt="keep.creator.name">
+                                        <p class="mb-0 oxygen text-break ps-2">
                                             {{ keep.creator.name }}
                                         </p>
                                     </div>

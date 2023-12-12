@@ -47,7 +47,7 @@
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted, ref } from 'vue';
 import Pop from '../utils/Pop';
-import { logger } from '../utils/Logger';
+// import { logger } from '../utils/Logger';
 import { useRoute } from 'vue-router';
 import { keepsService } from '../services/KeepsService';
 import { Modal } from 'bootstrap';
@@ -61,8 +61,8 @@ export default {
             // keeps should only be added if on the home page or account page
             async createKeep() {
                 try {
-                    logger.log(editable.value)
-                    logger.log(route.fullPath)
+                    // logger.log(editable.value)
+                    // logger.log(route.fullPath)
                     await keepsService.createKeep(editable.value, route.fullPath)
                     Modal.getOrCreateInstance('#createKeepModal').hide()
                     editable.value = {}

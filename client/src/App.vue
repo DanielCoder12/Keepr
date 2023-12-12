@@ -108,6 +108,11 @@ footer {
 
     z-index: 1250;
   }
+
+  .masonry-with-columns {
+    columns: 2 10px !important;
+    column-gap: 1rem !important;
+  }
 }
 
 // FIXME FIGURE OUT MASONRY ON MOBILE SIDE BY SIDE STACKING

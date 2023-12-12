@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <img class="rounded-circle profile-img" :src="profile.picture" alt="profile picture">
-                <p class=" mb-0 fs-1 oxygen">
+                <p class=" mb-0 text-break fs-1 oxygen">
                     {{ profile.name }}
                 </p>
                 <p class=" mb-0">

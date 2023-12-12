@@ -12,8 +12,8 @@
         </div>
         <div v-if="account.id" class="dropdown d-flex align-items-center justify-content-center common-width">
             <!-- FIXME BUTTON COLOR FAILS POSTMAN 😢 -->
-            <button class="btn btn-secondary shadow fw-bold btn-purple" type="button" id="CreateButtonDropDownMobile"
-                data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary shadow fw-bold btn-purple text-dark" type="button"
+                id="CreateButtonDropDownMobile" data-bs-toggle="dropdown" aria-expanded="false">
                 Create
             </button>
             <ul class="dropdown-menu" aria-labelledby="CreateButtonDropDownMobile">
@@ -59,7 +59,7 @@ p {
 }
 
 .btn-secondary {
-    background-color: #877A8F;
+    background-color: #DED6E9;
     border: none;
 }
 

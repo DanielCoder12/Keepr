@@ -17,14 +17,16 @@
 
             <p class="align-items-center text-break d-flex mb-0 marko-one font-shadow fs-3">{{ keep.name }}</p>
             <span v-if="keep.creator.id == account.id" :title="keep.creator.name"
-                class="text-end d-flex align-items-center"><img role="button" @click.stop="redirectToAccountPage()"
-                    class="creator-img rounded-circle" :src="keep.creator.picture" :alt="keep.creator.picture"></span>
+                class="text-end d-none d-md-flex align-items-center"><img role="button"
+                    @click.stop="redirectToAccountPage()" class="creator-img border shadow border-dark rounded-circle"
+                    :src="keep.creator.picture" :alt="keep.creator.picture"></span>
             <span v-else role="button" :title="keep.creator.name" @click.stop="redirectToProfilePage(keep.creatorId)"
-                class="text-end d-flex align-items-center"><img role="button" class="creator-img rounded-circle"
-                    :src="keep.creator.picture" :alt="keep.creator.name"></span>
+                class="text-end d-none d-md-flex align-items-center"><img role="button"
+                    class="creator-img border border-dark shadow rounded-circle" :src="keep.creator.picture"
+                    :alt="keep.creator.name"></span>
         </div>
-        <i @click.stop="deleteKeep(keep.id)" v-if="keep.creatorId == account.id" role="button" title="delete keep"
-            class="mdi close-position mdi-close-circle fs-4 text-danger"></i>
+        <i @click.stop="deleteKeep(keep.id)" v-if="keep.creator.id == account.id" role="button" title="delete keep"
+            class="mdi close-position text-shadow mdi-close-circle fs-4 text-danger"></i>
     </div>
 </template>
 
@@ -36,7 +38,7 @@ import { Keep } from '../models/Keep';
 import Pop from '../utils/Pop';
 import { Modal } from 'bootstrap';
 import { keepsService } from '../services/KeepsService';
-import { logger } from '../utils/Logger';
+// import { logger } from '../utils/Logger';
 import { useRouter } from 'vue-router';
 import { router } from '../router';
 import { vaultsService } from '../services/VaultsService';
@@ -54,7 +56,7 @@ export default {
             account: computed(() => AppState.account),
             async setActiveKeep(keepId) {
                 try {
-                    logger.log(keepId)
+                    // logger.log(keepId)
                     await keepsService.setActiveKeep(keepId)
                     await vaultsService.getVaultIdsKeepsAreIn(keepId)
                     Modal.getOrCreateInstance('#activeKeepModal').show()
@@ -106,6 +108,7 @@ img {
     position: absolute;
     top: -1rem;
     right: -.5rem;
+    text-shadow: 0px 0px 3px rgb(0, 0, 0);
 }
 
 
