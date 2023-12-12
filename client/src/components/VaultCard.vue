@@ -4,11 +4,11 @@
         <div class="w-100">
 
             <div class="d-flex justify-content-between">
-                <p class="m-2 text-white quando font-shadow fs-2">
+                <p class="m-2 text-white text-break quando font-shadow fs-2">
                     {{ vault.name }}
                 </p>
                 <i v-if="vault.isPrivate"
-                    class="mdi d-flex align-items-center text-white font-shadow fs-2 mdi-lock-outline m-2"></i>
+                    class="mdi d-flex align-items-end text-white font-shadow fs-2 mdi-lock-outline m-2"></i>
             </div>
         </div>
     </div>

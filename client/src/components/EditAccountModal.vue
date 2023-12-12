@@ -51,9 +51,14 @@ export default {
         return {
             editable,
             async editAccount() {
-                await accountService.editAccount(editable.value)
-                Modal.getOrCreateInstance('#editAccountModal').hide()
-                Pop.success('Account Edited')
+                try {
+
+                    await accountService.editAccount(editable.value)
+                    Modal.getOrCreateInstance('#editAccountModal').hide()
+                    Pop.success('Account Edited')
+                } catch (error) {
+                    Pop.error(error)
+                }
             }
         }
     }

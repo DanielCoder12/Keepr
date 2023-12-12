@@ -15,61 +15,74 @@
                                 <i data-bs-toggle="modal" data-bs-target="#activeKeepModal"
                                     class="mdi d-flex d-md-none fs-3 x-position mdi-close"></i>
                             </div>
-                            <div class="col-12 col-md-6 py-md-4 px-md-5  d-flex flex-column justify-content-between">
+                            <div
+                                class="col-12 col-md-6 py-md-4 pt-md-4 pb-md-0 bg-cream rounded-end d-flex flex-column justify-content-between">
                                 <div class="d-flex justify-content-center font-gray">
-                                    <p class="me-2 fs-5">
+                                    <p class="me-2 mb-0 fs-5 pt-2">
                                         <i class="mdi mdi-eye"></i>
                                         {{ keep.views }}
 
                                     </p>
-                                    <p class="ms-2 fs-5">
+                                    <p class="ms-2 mb-0 fs-5 pt-2">
                                         <i class="mdi mdi-alpha-k-box-outline"></i>
                                         {{ keep.kept }}
                                     </p>
                                 </div>
                                 <div>
-                                    <p class="text-center marko-one fs-1 fw-bold">
+                                    <p class="text-center mb-0 text-break marko-one fs-1 fw-bold">
                                         {{ keep.name }}
                                     </p>
-                                    <p class="font-gray">
+                                    <p class="font-gray mb-0 text-break">
                                         {{ keep.description }}
                                     </p>
 
                                 </div>
-                                <div class="d-flex mb-3 justify-content-between">
+                                <div class="d-flex pb-3 mt-3 mt-md-0 justify-content-between">
                                     <div class="d-flex ">
+                                        <!-- FIXME MAKE LOOK LIKE MOCK -->
+                                        <div v-if="vault.creatorId == account.id && $route.name == 'Vault'">
+                                            <button @click="removeKeepFromVault(keep.vaultKeepId)"
+                                                class="text-white btn btn-danger"><i class="mdi mdi-close-circle"></i>
+                                                Remove</button>
+                                        </div>
                                         <!-- FIXME really ugly -->
-                                        <form v-if="account.id" @submit.prevent="saveKeep()" class="d-flex">
-                                            <!-- FIXME MAKE IT SO IF KEEP IS ALREADY IN VAULT IT DOESNT SHOW ON THE FORM -->
-                                            <select v-model="selectedVault" class="form-select oxygen "
-                                                aria-label="Default select example">
-                                                <option v-for=" vault in filteredVaults" class="oxygen" :value="vault.id"
-                                                    :key="vault.id">
+                                        <div v-else>
 
-                                                    {{ vault.name }}
-                                                </option>
+                                            <form v-if="account.id" @submit.prevent="saveKeep()" class="d-flex ">
+                                                <!-- FIXME MAKE IT SO IF KEEP IS ALREADY IN VAULT IT DOESNT SHOW ON THE FORM -->
+                                                <select role="button" v-model="selectedVault"
+                                                    class="bg-cream dropdown rounded oxygen "
+                                                    aria-label="Default select example">
+                                                    <option v-for=" vault in filteredVaults" class="oxygen"
+                                                        :value="vault.id" :key="vault.id">
 
-                                            </select>
-                                            <!-- FIXME STYLE THIS BUTTON, MODAL AND INPUT -->
-                                            <button :disabled="selectedVault == ''" type="submit"
-                                                class="btn btn-secondary text-white">Save</button>
-                                        </form>
+                                                        {{ vault.name }}
+                                                    </option>
+
+                                                </select>
+                                                <!-- FIXME STYLE THIS BUTTON, MODAL AND INPUT -->
+                                                <button :disabled="selectedVault == ''" type="submit"
+                                                    class="btn btn-secondary text-white">Save</button>
+                                            </form>
+                                        </div>
                                     </div>
                                     <div class="d-flex align-items-center" role="button" v-if="keep.creatorId == account.id"
                                         @click="redirectToAccountPage()">
 
                                         <img class="rounded-circle profile-img shadow" :src="keep.creator.picture"
                                             :alt="keep.creator.name">
-                                        <p class="mb-0 oxygen ">
+                                        <p class="mb-0 fw-bold ps-2 oxygen ">
                                             {{ keep.creator.name }}
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center" role="button" v-else
-                                        @click="redirectToProfilePage()">
+                                        @click="redirectToProfilePage(keep.creator.id)">
 
                                         <img class="rounded-circle profile-img shadow" :src="keep.creator.picture"
                                             :alt="keep.creator.name">
-                                        {{ keep.creator.name }}
+                                        <p class="mb-0 oxygen ps-2">
+                                            {{ keep.creator.name }}
+                                        </p>
                                     </div>
 
                                 </div>
@@ -101,6 +114,7 @@ export default {
             router,
             selectedVault,
             keep: computed(() => AppState.activeKeep),
+            vault: computed(() => AppState.activeVault),
             vaults: computed(() => AppState.accountVaults),
             account: computed(() => AppState.account),
             vaultsWithKeep: computed(() => AppState.vaultsWithActiveKeep),
@@ -121,6 +135,19 @@ export default {
             redirectToProfilePage(profileId) {
                 Modal.getOrCreateInstance('#activeKeepModal').hide()
                 router.push({ name: 'Profile', params: { profileId } })
+            },
+            async removeKeepFromVault(vaultKeepId) {
+                try {
+                    const yes = await Pop.confirm('Are you sure you would like to remove this keep from your vault?')
+                    if (!yes) {
+                        return
+                    }
+                    await vaultsService.removeKeepFromVault(vaultKeepId)
+                    Pop.success('keep removed from vault')
+                    Modal.getOrCreateInstance('#activeKeepModal').hide()
+                } catch (error) {
+                    Pop.error(error)
+                }
             }
 
         }
@@ -134,14 +161,35 @@ export default {
     height: 60vh;
 }
 
+.dropdown {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 12rem;
+    height: 2rem;
+}
+
+@media(max-width: 767px) {
+    .dropdown {
+        width: 6rem;
+    }
+}
+
 .x-position {
     position: absolute;
     top: 1%;
     right: 2%;
 }
 
+.bg-cream {
+    background-color: #FEF6F0;
+}
+
 .btn-secondary {
     background-color: #877A8F;
+    height: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 .keep-img {
@@ -160,7 +208,7 @@ export default {
 
 
 .profile-img {
-    height: 3rem;
+    height: 2.5rem;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: center;

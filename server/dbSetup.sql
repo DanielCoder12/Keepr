@@ -38,6 +38,8 @@ CREATE TABLE
         FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
+ALTER TABLE vaults MODIFY name VARCHAR(30);
+
 DROP TABLE vaults
 
 CREATE TABLE

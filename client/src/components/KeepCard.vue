@@ -13,13 +13,13 @@
         <img class="w-100 rounded card-shadow" :src="keep.img" alt="">
         <div class="d-flex px-3 w-100 position justify-content-between">
 
-            <p class="align-items-center d-flex mb-0 marko-one font-shadow fs-3">{{ keep.name }}</p>
-            <span v-if="keep.creator.id == account.id" :title="keep.creator.name" class="text-end"><img role="button"
-                    @click.stop="redirectToAccountPage()" class="creator-img rounded-circle" :src="keep.creator.picture"
-                    :alt="keep.creator.name"></span>
+            <p class="align-items-center text-break d-flex mb-0 marko-one font-shadow fs-3">{{ keep.name }}</p>
+            <span v-if="keep.creator.id == account.id" :title="keep.creator.name"
+                class="text-end d-flex align-items-center"><img role="button" @click.stop="redirectToAccountPage()"
+                    class="creator-img rounded-circle" :src="keep.creator.picture" :alt="keep.creator.picture"></span>
             <span v-else role="button" :title="keep.creator.name" @click.stop="redirectToProfilePage(keep.creatorId)"
-                class="text-end"><img role="button" class="creator-img rounded-circle" :src="keep.creator.picture"
-                    :alt="keep.creator.name"></span>
+                class="text-end d-flex align-items-center"><img role="button" class="creator-img rounded-circle"
+                    :src="keep.creator.picture" :alt="keep.creator.name"></span>
         </div>
         <i @click.stop="deleteKeep(keep.id)" v-if="keep.creatorId == account.id" role="button" title="delete keep"
             class="mdi close-position mdi-close-circle fs-4 text-danger"></i>
@@ -67,6 +67,9 @@ export default {
             async deleteKeep(keepId) {
                 try {
                     const yes = await Pop.confirm('Are you sure you would like to delete this keep?')
+                    if (!yes) {
+                        return
+                    }
                     await keepsService.deleteKeep(keepId)
                 } catch (error) {
                     Pop.error(error)

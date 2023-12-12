@@ -14,7 +14,7 @@
                             <form @submit.prevent="createVault()">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Title</label>
-                                    <input required maxlength="50" v-model="editable.name" placeholder="Title..."
+                                    <input required maxlength="20" v-model="editable.name" placeholder="Title..."
                                         type="text" class="form-control" id="name" aria-describedby="nameHelp">
                                 </div>
                                 <div class="mb-5">
@@ -51,7 +51,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted, ref, watchEffect } from 'vue';
+import { computed, reactive, onMounted, ref, watchEffect, onUnmounted, watch, VueElement } from 'vue';
 import Pop from '../utils/Pop';
 import { logger } from '../utils/Logger';
 import { vaultsService } from '../services/VaultsService';
@@ -65,6 +65,14 @@ export default {
             if (AppState.isEditing) {
                 editable.value = { ...AppState.activeVault }
             }
+            onMounted(() => {
+                var myModalEl = document.getElementById('createVaultModal')
+                myModalEl.addEventListener('hidden.bs.modal', function (event) {
+                    vaultsService.changeEditStatusFalse()
+                    editable.value = {}
+                })
+            })
+
         })
         return {
             editable,

@@ -64,6 +64,17 @@ class VaultsService {
         logger.log('vault keeps', res.data)
         AppState.vaultsWithActiveKeep = res.data.map(vk => new VaultKeep(vk))
     }
+    async removeKeepFromVault(vaultKeepId) {
+        await api.delete(`api/vaultkeeps/${vaultKeepId}`)
+        AppState.keeps = AppState.keeps.filter(k => k.vaultKeepId != vaultKeepId)
+    }
+
+    changeEditStatus() {
+        AppState.isEditing = true
+    }
+    changeEditStatusFalse() {
+        AppState.isEditing = false
+    }
 }
 
 export const vaultsService = new VaultsService()

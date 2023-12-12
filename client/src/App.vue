@@ -66,7 +66,7 @@ export default {
 }
 
 .font-shadow {
-  text-shadow: 1px 1px 8px black;
+  text-shadow: 1px 1px 2px black;
 }
 
 .card-shadow {
@@ -135,14 +135,7 @@ footer {
     // font-size: 2rem;
   }
 
-  @for $i from 1 through 36 {
-    div:nth-child(#{$i}) {
-      $h: (
-        random(400) + 100) + px;
-      // height: $h;
-      // line-height: $h;
-    }
-  }
+
 }
 
 a {

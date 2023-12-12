@@ -14,6 +14,8 @@ class KeepsService {
     async setActiveKeep(keepId) {
         const res = await api.get(`api/keeps/${keepId}`)
         AppState.activeKeep = new Keep(res.data)
+        const keep = AppState.keeps.find(k => k.id == keepId)
+        AppState.activeKeep.vaultKeepId = keep.vaultKeepId
     }
 
     async getProfileKeeps(profileId) {
@@ -30,7 +32,7 @@ class KeepsService {
 
     async createKeep(keepData, routePath) {
         const res = await api.post('api/keeps', keepData)
-        if (routePath == '/' || routePath == '/account') {
+        if (routePath == '/' || routePath == '/account/') {
             AppState.keeps.push(new Keep(res.data))
         }
     }

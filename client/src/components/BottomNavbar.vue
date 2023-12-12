@@ -11,11 +11,11 @@
             </router-link>
         </div>
         <div v-if="account.id" class="dropdown d-flex align-items-center justify-content-center common-width">
-            <button class="btn btn-secondary fw-bold btn-purple" type="button" id="dropdownMenuButton1"
+            <button class="btn btn-secondary fw-bold btn-purple" type="button" id="CreateButtonDropDownMobile"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 Create
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" aria-labelledby="CreateButtonDropDownMobile">
                 <li data-bs-toggle="modal" data-bs-target="#createKeepModal"><a class="dropdown-item">New
                         Keep</a></li>
                 <li data-bs-toggle="modal" data-bs-target="#createVaultModal"><a class="dropdown-item">New

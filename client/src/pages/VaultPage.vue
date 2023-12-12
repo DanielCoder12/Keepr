@@ -3,10 +3,14 @@
     <div class="container-fluid">
         <section class="row d-flex justify-content-center">
             <div class="col-12 col-md-3 mt-4">
-                <div class="vault-img font-shadow d-flex flex-column justify-content-end rounded text-white text-center"
+                <div class="vault-img font-shadow position-relative d-flex flex-column justify-content-end rounded text-white text-center"
                     :style="{ backgroundImage: `url(${vault.img})` }">
+                    <div class="quando title-position">
+                        <h1 class="text-break fs-2">{{ vault.name }} </h1>
+                        <p>by {{ vault.creator?.name }}</p>
+                    </div>
                     <div>
-                        <i class="mdi text-white fs-3 lock-position mdi-lock"></i>
+                        <i v-if="vault.isPrivate" class="mdi text-white fs-3 lock-position mdi-lock"></i>
                         <i v-if="vault.creatorId == account.id" role="button" title="vault options"
                             class="mdi mdi-dots-horizontal position" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"></i>
@@ -14,10 +18,6 @@
                             <a @click="openEditModal()" class="dropdown-item">Edit Vault</a>
                             <a @click="deleteVault(vault.id)" class="dropdown-item text-danger">Delete Vault</a>
                         </div>
-                    </div>
-                    <div class="quando">
-                        <h1>{{ vault.name }} </h1>
-                        <p>by {{ vault.creator?.name }}</p>
                     </div>
 
                 </div>
@@ -67,9 +67,9 @@ export default {
     setup() {
         const route = useRoute();
         const router = useRouter();
-        onMounted(() => {
-            // route,
-            clearAppState();
+        watchEffect(() => {
+            route,
+                clearAppState();
             getVaultById();
             getKeepsByVaultId();
         });
@@ -118,8 +118,8 @@ export default {
             },
             openEditModal() {
                 // FIXME MAKE WORK AND MAKE APPSTATE FALSE WHEN MODAL CLOSES
-                Modal.getOrCreateInstance('#CreateVaultModal').show()
-                AppState.editing = true
+                vaultsService.changeEditStatus()
+                Modal.getOrCreateInstance('#createVaultModal').show()
             }
         };
     },
@@ -132,14 +132,22 @@ export default {
 .position {
     color: black;
     position: relative;
-    top: 7.7rem;
+    top: 2rem;
     left: 8.6rem;
     text-shadow: none;
 }
 
+.title-position {
+    position: absolute;
+    bottom: 0rem;
+    right: 5rem;
+    left: 5rem;
+
+}
+
 .lock-position {
     position: relative;
-    top: -2rem;
+    top: -8rem;
     left: 10rem;
 }
 
