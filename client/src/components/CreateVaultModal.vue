@@ -51,7 +51,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted, ref } from 'vue';
+import { computed, reactive, onMounted, ref, watchEffect } from 'vue';
 import Pop from '../utils/Pop';
 import { logger } from '../utils/Logger';
 import { vaultsService } from '../services/VaultsService';
@@ -61,6 +61,11 @@ export default {
     setup() {
         const editable = ref({})
         const router = useRouter()
+        watchEffect(() => {
+            if (AppState.isEditing) {
+                editable.value = { ...AppState.activeVault }
+            }
+        })
         return {
             editable,
             router,

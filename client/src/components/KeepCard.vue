@@ -37,6 +37,7 @@ import { keepsService } from '../services/KeepsService';
 import { logger } from '../utils/Logger';
 import { useRouter } from 'vue-router';
 import { router } from '../router';
+import { vaultsService } from '../services/VaultsService';
 export default {
     props: {
         keep: { type: Keep }
@@ -51,6 +52,7 @@ export default {
                 try {
                     logger.log(keepId)
                     await keepsService.setActiveKeep(keepId)
+                    await vaultsService.getVaultIdsKeepsAreIn(keepId)
                     Modal.getOrCreateInstance('#activeKeepModal').show()
                 } catch (error) {
                     Pop.error(error)

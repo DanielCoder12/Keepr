@@ -1,6 +1,7 @@
 
 
 
+
 namespace Keepr.Services;
 
 public class VaultKeepsService
@@ -46,4 +47,9 @@ public class VaultKeepsService
         return vaultKeep;
     }
 
+    internal List<VaultKeep> getVaultsAccountKeepsAreIn(int keepId, string id)
+    {
+        List<VaultKeep> vaultKeeps = _repo.getVaultsAccountKeepsAreIn(keepId, id);
+        return vaultKeeps;
+    }
 }

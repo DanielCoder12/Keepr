@@ -9,11 +9,12 @@ public class KeepsController : ControllerBase
 
     private readonly KeepsService _keepsService;
     private readonly Auth0Provider _a0;
-
-    public KeepsController(KeepsService keepsService, Auth0Provider a0)
+    private readonly VaultKeepsService _vaultKeepsService;
+    public KeepsController(KeepsService keepsService, Auth0Provider a0, VaultKeepsService vaultKeepsService)
     {
         _keepsService = keepsService;
         _a0 = a0;
+        _vaultKeepsService = vaultKeepsService;
     }
 
     [Authorize]
@@ -94,4 +95,18 @@ public class KeepsController : ControllerBase
         }
     }
 
+    [HttpGet("{keepId}/vaultKeeps")]
+    public async Task<ActionResult<List<VaultKeep>>> getVaultsAccountKeepsAreIn(int keepId)
+    {
+        try
+        {
+            Account userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
+            List<VaultKeep> vaultKeeps = _vaultKeepsService.getVaultsAccountKeepsAreIn(keepId, userInfo.Id);
+            return Ok(vaultKeeps);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }

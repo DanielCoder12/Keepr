@@ -43,9 +43,11 @@
                                             <!-- FIXME MAKE IT SO IF KEEP IS ALREADY IN VAULT IT DOESNT SHOW ON THE FORM -->
                                             <select v-model="selectedVault" class="form-select oxygen "
                                                 aria-label="Default select example">
-                                                <option v-for=" vault in vaults" class="oxygen" :value="vault.id"
-                                                    :key="vault.id">{{
-                                                        vault.name }}</option>
+                                                <option v-for=" vault in filteredVaults" class="oxygen" :value="vault.id"
+                                                    :key="vault.id">
+
+                                                    {{ vault.name }}
+                                                </option>
 
                                             </select>
                                             <!-- FIXME STYLE THIS BUTTON, MODAL AND INPUT -->
@@ -101,6 +103,8 @@ export default {
             keep: computed(() => AppState.activeKeep),
             vaults: computed(() => AppState.accountVaults),
             account: computed(() => AppState.account),
+            vaultsWithKeep: computed(() => AppState.vaultsWithActiveKeep),
+            filteredVaults: computed(() => AppState.accountVaults.filter(v => AppState.vaultsWithActiveKeep.find(vw => v.id == vw.vaultId) == null)),
             async saveKeep() {
                 try {
                     await vaultsService.saveKeepToVault(selectedVault.value, this.keep.id)

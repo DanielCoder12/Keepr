@@ -1,6 +1,7 @@
 
 
 
+
 namespace Keepr.Repositories;
 
 public class VaultKeepsRepository
@@ -42,5 +43,14 @@ public class VaultKeepsRepository
         ;";
         VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, new { vaultKeepId }).FirstOrDefault();
         return vaultKeep;
+    }
+
+    internal List<VaultKeep> getVaultsAccountKeepsAreIn(int keepId, string id)
+    {
+        string sql = @"
+        SELECT * FROM vaultKeeps WHERE keepId = @keepId AND creatorId = @id;
+        ;";
+        List<VaultKeep> vaultKeeps = _db.Query<VaultKeep>(sql, new { keepId, id }).ToList();
+        return vaultKeeps;
     }
 }

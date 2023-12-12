@@ -6,16 +6,17 @@
                 <div class="vault-img font-shadow d-flex flex-column justify-content-end rounded text-white text-center"
                     :style="{ backgroundImage: `url(${vault.img})` }">
                     <div>
-
+                        <i class="mdi text-white fs-3 lock-position mdi-lock"></i>
                         <i v-if="vault.creatorId == account.id" role="button" title="vault options"
                             class="mdi mdi-dots-horizontal position" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"></i>
                         <div class="dropdown-menu dropdown-position" aria-labelledby="dropdownMenuButton">
+                            <a @click="openEditModal()" class="dropdown-item">Edit Vault</a>
                             <a @click="deleteVault(vault.id)" class="dropdown-item text-danger">Delete Vault</a>
                         </div>
                     </div>
                     <div class="quando">
-                        <h1>{{ vault.name }}</h1>
+                        <h1>{{ vault.name }} </h1>
                         <p>by {{ vault.creator?.name }}</p>
                     </div>
 
@@ -61,6 +62,7 @@ import { vaultsService } from '../services/VaultsService';
 import KeepCard from '../components/KeepCard.vue';
 import { router } from '../router';
 import { logger } from '../utils/Logger';
+import { Modal } from 'bootstrap';
 export default {
     setup() {
         const route = useRoute();
@@ -71,6 +73,7 @@ export default {
             getVaultById();
             getKeepsByVaultId();
         });
+
         function clearAppState() {
             vaultsService.clearAppState();
         }
@@ -112,6 +115,11 @@ export default {
                 } catch (error) {
                     Pop.error(error)
                 }
+            },
+            openEditModal() {
+                // FIXME MAKE WORK AND MAKE APPSTATE FALSE WHEN MODAL CLOSES
+                Modal.getOrCreateInstance('#CreateVaultModal').show()
+                AppState.editing = true
             }
         };
     },
@@ -124,9 +132,15 @@ export default {
 .position {
     color: black;
     position: relative;
-    top: 7.5rem;
-    left: 10rem;
+    top: 7.7rem;
+    left: 8.6rem;
     text-shadow: none;
+}
+
+.lock-position {
+    position: relative;
+    top: -2rem;
+    left: 10rem;
 }
 
 .dropdown-position {

@@ -145,3 +145,9 @@ SET
 WHERE
     id = '6541814359b43990cb08b854'
 LIMIT 1;
+
+SELECT *
+FROM vaultKeeps
+WHERE
+    keepId = 6
+    AND creatorId = "6541814359b43990cb08b854";
