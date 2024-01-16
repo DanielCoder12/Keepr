@@ -10,7 +10,7 @@
     </div> -->
     <!-- FIXME FIX BROKEN IMAGES -->
     <div role="button" @click.stop="setActiveKeep(keep.id)" class="image ">
-        <img v-if="didLoad" @error="loadFailed(keep.id)" class="w-100 rounded card-shadow" :src="keep.img" alt="">
+        <img v-if="didLoad" @error="loadFailed(keep.id)" class="w-100 rounded  card-shadow" :src="keep.img" alt="">
         <img v-else class="w-100 rounded card-shadow" src="https://www.drupal.org/files/project-images/broken-image.jpg"
             alt="">
         <div class="d-flex px-3 w-100 position justify-content-between">

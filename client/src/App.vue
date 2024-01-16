@@ -110,7 +110,7 @@ footer {
   }
 
   .masonry-with-columns {
-    columns: 2 10px !important;
+    columns: 2 100px !important;
     column-gap: 1rem !important;
   }
 }

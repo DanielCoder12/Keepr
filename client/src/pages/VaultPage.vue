@@ -8,9 +8,9 @@
             <div class="col-12 col-md-3 mt-4">
                 <div class="vault-img position-relative d-flex flex-column justify-content-end rounded text-white text-center"
                     :style="{ backgroundImage: `url(${vault.img})` }">
-                    <div class="quando font-shadow  title-position">
-                        <h1 class="text-break fs-2">{{ vault.name }} </h1>
-                        <p>by {{ vault.creator?.name }}</p>
+                    <div class="quando w-100 font-shadow  title-position">
+                        <h1 class="text-break w-100 fs-2">{{ vault.name }} </h1>
+                        <p class="text-break w-100">by {{ vault.creator?.name }}</p>
                     </div>
                     <div>
                         <i v-if="vault.isPrivate" class="mdi font-shadow  text-white fs-3 lock-position mdi-lock"></i>
@@ -144,7 +144,7 @@ export default {
     position: absolute;
     bottom: 0rem;
     right: 5rem;
-    left: 5rem;
+    left: 0rem;
 
 }
 
