@@ -134,10 +134,10 @@ export default {
 <style lang="scss" scoped>
 .position {
     color: black;
-    position: relative;
-    top: 2rem;
-    left: 6.6rem;
+    position: absolute;
     text-shadow: none;
+    bottom: -2rem;
+    right: .4rem;
 }
 
 .title-position {
@@ -149,15 +149,16 @@ export default {
 }
 
 .lock-position {
-    position: relative;
-    top: -8rem;
-    left: 8rem;
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+
 }
 
 .dropdown-position {
     position: relative;
     top: 10rem;
-    left: 10rem;
+    left: 10vh;
 }
 
 .vault-img {
