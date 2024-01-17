@@ -94,6 +94,10 @@ export default {
 .creator-img {
     height: 3rem;
     aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    background-position: center;
+    background-repeat: none;
 }
 
 img:hover {

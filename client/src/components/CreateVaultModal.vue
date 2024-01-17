@@ -34,7 +34,7 @@
                                     <div class="form-check d-flex justify-content-end">
 
                                         <input v-model="editable.isPrivate" class="form-check-input bg-gray" type="checkbox"
-                                            value="" id="flexCheckDefault">
+                                            id="flexCheckDefault">
                                         <label class="form-check-label ms-2" for="flexCheckDefault">
                                             Make Vault Private?
                                         </label>
@@ -61,6 +61,7 @@ import Pop from '../utils/Pop';
 import { vaultsService } from '../services/VaultsService';
 import { useRouter } from 'vue-router';
 import { Modal } from 'bootstrap';
+import { logger } from '../utils/Logger';
 export default {
     setup() {
         const editable = ref({})
@@ -85,7 +86,10 @@ export default {
             async editOrCreate() {
                 if (AppState.isEditing == false) {
                     try {
-                        // logger.log(editable.value)
+                        if (!editable.isPrivate) {
+                            editable.isPrivate = false
+                        }
+
                         const vault = await vaultsService.createVault(editable.value)
                         Modal.getOrCreateInstance('#createVaultModal').hide()
                         editable.value = {}
@@ -98,6 +102,7 @@ export default {
                 if (AppState.isEditing) {
 
                     try {
+                        logger.log(editable.value)
                         await vaultsService.editVault(editable.value, AppState.activeVault.id)
                         Modal.getOrCreateInstance('#createVaultModal').hide()
                     } catch (error) {

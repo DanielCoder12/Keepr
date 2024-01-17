@@ -61,8 +61,11 @@ export default {
 .background-img {
     height: 25rem;
     margin-bottom: 9rem;
-    object-fit: cover;
-    object-position: center;
+    // object-fit: cover;
+    // object-position: center;
+    // background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
 }
 

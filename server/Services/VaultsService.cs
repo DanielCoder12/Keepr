@@ -39,6 +39,8 @@ public class VaultsService
         }
         oldVault.Name = vaultData.Name ?? oldVault.Name;
         oldVault.IsPrivate = vaultData.IsPrivate ?? oldVault.IsPrivate;
+        oldVault.Img = vaultData.Img ?? oldVault.Img;
+        oldVault.Description = vaultData.Description ?? oldVault.Description;
         Vault vault = _repo.EditVault(oldVault);
         return vault;
 

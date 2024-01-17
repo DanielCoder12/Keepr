@@ -24,8 +24,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="coverImg" class="form-label">Cover Image</label>
-                            <input required maxlength="500" v-model="editable.coverImg" type="url" class="form-control"
-                                id="coverImg" aria-describedby="coverImgHelp">
+                            <input maxlength="500" v-model="editable.coverImg" type="url" class="form-control" id="coverImg"
+                                aria-describedby="coverImgHelp">
                         </div>
                     </div>
                     <div class="modal-footer">
