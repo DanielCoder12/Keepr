@@ -5,6 +5,7 @@ import { Vault } from "../models/Vault"
 import { api } from "./AxiosService"
 import { Keep } from "../models/Keep"
 import { VaultKeep } from "../models/VaultKeep"
+import { logger } from "../utils/Logger"
 
 class VaultsService {
 
@@ -78,6 +79,7 @@ class VaultsService {
 
 
     async editVault(vaultData, vaultId) {
+        logger.log(vaultData)
         const res = await api.put(`api/vaults/${vaultId}`, vaultData)
         AppState.activeVault = new Vault(res.data)
         const index = AppState.accountVaults.findIndex(v => v.id == vaultId)

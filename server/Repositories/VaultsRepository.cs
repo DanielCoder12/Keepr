@@ -52,7 +52,9 @@ public class VaultsRepository
         string sql = @"
          UPDATE vaults
         SET name = @Name,
-        isPrivate = @IsPrivate
+        isPrivate = @IsPrivate,
+        img = @Img,
+        description = @Description
         WHERE vaults.id = @Id
         ;
         SELECT 
