@@ -92,6 +92,7 @@ footer {
   display: none;
 }
 
+
 @media(max-width: 767px) {
   .top-show {
     display: none;
@@ -131,7 +132,7 @@ footer {
     width: 150px;
     // background: #EC985A;
     color: white;
-    margin: 0 1rem 1rem 0;
+    margin: 0 0rem 1rem 0;
     display: inline-block;
     width: 100%;
     // text-align: center;
