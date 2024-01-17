@@ -3,7 +3,7 @@
     <!-- FIXME MOBILE VIEW -->
     <div v-if="keep.id" class="modal fade modal-xl" id="activeKeepModal" tabindex="-1" role="dialog"
         aria-labelledby="activeKeepModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
 
                 <div class="modal-body p-0">
@@ -175,6 +175,7 @@ export default {
         width: 6rem;
     }
 }
+
 
 .x-position {
     position: absolute;
