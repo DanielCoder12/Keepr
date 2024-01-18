@@ -206,6 +206,10 @@ export default {
         height: 50vh;
         width: 100%;
     }
+
+    #activeKeepModal {
+        max-height: 88dvh;
+    }
 }
 
 
